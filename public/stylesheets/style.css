@@ -7,54 +7,59 @@ body {
     min-height: 80%;
 }
 
-a {
-    color: #00B7FF;
+h2 {
+    margin: 0;
 }
 
-div.container {
-    width: 100%;
-    border: 1px solid gray;
-    height: 100%;
+a {
+    color: #5a5c51;
 }
 
 header,
 footer {
-    padding: 1em;
-    color: white;
-    background-color: black;
+    padding: 10px;
+    color: #bcd5d1;
+    background-color: #1d2120;
     clear: left;
     text-align: center;
+    border-radius: 5px;
 }
 
-.content {
-    min-height: calc(100vh - 60px);
+.content-container {
+    margin: 5px 15px 10px 110px;
 }
 
 nav {
     float: left;
-    max-width: 160px;
-    margin: 0;
-    padding: 1em;
+    position: relative;
+    width: 100px;
+    height: 100%;
+    margin-top: 10px;
+    padding: 0em;
+    background: #ba9077;
+    border-radius: 5px;
 }
 
 nav ul {
     list-style-type: none;
-    padding: 0;
+    padding: 1em;
 }
 
 nav ul a {
     text-decoration: none;
+    display: block;
+    padding-bottom: 10px;
 }
 
-.agents {
-    height: 100%;
-}
+.agents {}
 
 .agent {
-    padding: 4px;
-    height: 100%;
+    padding: 3px;
     float: left;
-    margin: 15px;
-    border: 5px solid green;
-    border-radius: 10px;
+    margin: 5px 0px 5px 0px;
+    border: 5px solid #5a5c51;
+    border-radius: 5px;
+    display: block;
+    /*    width: calc(100% - 150px);*/
+    width: 100%;
 }
