@@ -1,8 +1,60 @@
+html {
+    height: 100%;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    min-height: 80%;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+    height: 100%;
+}
+
+header,
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+.content {
+    min-height: calc(100vh - 60px);
+}
+
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+
+.agents {
+    height: 100%;
+}
+
+.agent {
+    padding: 4px;
+    height: 100%;
+    float: left;
+    margin: 15px;
+    border: 5px solid green;
+    border-radius: 10px;
 }
