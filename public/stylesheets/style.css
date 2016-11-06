@@ -7,6 +7,12 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     min-height: 80%;
     color: #434343;
+    min-width: 1000px;
+    /* minimum width of 1000px */
+    width: auto !important;
+    /* set width as auto */
+    width: 1000px;
+    /* As IE ignores !important it will set width as 1000px; */
 }
 
 header,
@@ -77,11 +83,15 @@ nav ul a {
     border-radius: 3px;
     float: left;
     margin-top: 10px;
+    width: 230px;
 }
 
-graph {
-    height: auto;
-    width: auto;
-    max-width: 300px;
-    max-height: 300px;
+.graph {
+    position: relative;
+    float: right;
+    margin-right: 10px;
+}
+
+.caption {
+    text-align: center;
 }
