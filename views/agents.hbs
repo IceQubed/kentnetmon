@@ -65,6 +65,17 @@
                             <th>Packet Loss</th>
                             <td>0%</td>
                         </tr>
+                        <tr>
+                            <th>Run test</th>
+                            <td>
+                                <input name="like" id="like" value="Like" type="submit" />
+                                <script>
+                                    $('#like').click(function() {
+                                        $.post('/test')
+                                    });
+                                </script>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="graph">
