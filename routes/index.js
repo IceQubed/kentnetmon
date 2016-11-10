@@ -8,19 +8,4 @@ router.get('/', function (req, res, next) {
     });
 });
 
-/* GET agents page. */
-router.get('/agents', function (req, res, next) {
-    res.render('agents', {
-        title: 'KentNetMon Agents'
-    });
-});
-
-/* GET settings page. */
-router.get('/settings', function (req, res, next) {
-    res.render('settings', {
-        title: 'KentNetMon Settings'
-    });
-});
-
-
 module.exports = router;
