@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
         console.log(comments)
         res.render(
             'agents', {
-                title: 'My funky form',
+                title: 'KentNetMon Agents',
                 comments: comments
             }
         );
