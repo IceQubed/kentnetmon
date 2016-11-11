@@ -1,3 +1,6 @@
+// mongoose config
+require('./database');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -29,8 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use(agents);
-app.use(settings);
+app.use('/agents', agents);
+app.use('/settings', settings);
+app.use('/create', agents);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
