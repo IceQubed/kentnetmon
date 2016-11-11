@@ -65,21 +65,18 @@
                             <th>Packet Loss</th>
                             <td>0%</td>
                         </tr>
-                        <tr>
-                            <th>Run test</th>
-                            <td>
-                                <form method="post" action="/create">
-                                    <label for="comment">Got something to say:</label>
-                                    <input type="text" name="comment" value="comment">
-                                    <input type="submit" value="Save">
-                                </form>
-                            </td>
-                        </tr>
                     </table>
                 </div>
                 <div class="graph">
                     <img src="/images/graph.png" alt="Network Graph" style="width:300px;">
                     <div class="caption">Network Throughput</div>
+                </div>
+                <div>
+                    <form method="post" action="/create">
+                        <label for="comment">Got something to say:</label>
+                        <input type="text" name="comment" value="comment">
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
             </div>
             <div class=" agent ">
