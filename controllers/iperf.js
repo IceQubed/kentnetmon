@@ -16,7 +16,7 @@ router.post('/', function (req, res) {
 
 
         console.log('\n \n \n \n \n \n');
-        console.log(newResult);
+        console.dir(newResult);
 
         Result(newResult).save(function (err) {
             if (err) throw err;
