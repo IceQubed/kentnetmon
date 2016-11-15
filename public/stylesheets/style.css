@@ -96,6 +96,16 @@ nav ul a {
     padding: 5px;
 }
 
+.controls {
+    border: 1px solid #434343;
+    border-radius: 3px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 230px;
+    padding: 5px;
+}
+
 .graph {
     position: relative;
     float: right;
