@@ -10,7 +10,13 @@ router.post('/', function (req, res) {
     // execFile: executes a file with the specified arguments
     child_process.execFile('iperf3', ['-c', '192.168.1.102', '-J'], function (error, stdout, stderr) {
 
+        console.log(stdout);
+
         newResult = JSON.parse(stdout);
+
+
+        console.log('\n \n \n \n \n \n');
+        console.log(newResult);
 
         Result(newResult).save(function (err) {
             if (err) throw err;
