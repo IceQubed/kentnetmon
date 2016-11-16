@@ -103,5 +103,4 @@ var Result = new Schema({
 mongoose.model('comments', Comment);
 mongoose.model('results', Result);
 
-mongoose.connect('mongodb://localhost/node-comment');
-mongoose.createConnection('mongodb://localhost/iperf-results');
+mongoose.connect('mongodb://localhost/kentnetmon');

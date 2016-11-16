@@ -4,42 +4,22 @@ var child_process = require('child_process');
 var mongoose = require('mongoose');
 var Result = mongoose.model('results');
 var newResult = new Result();
+var Comment = mongoose.model('comments');
 
-/* POST form. */
+/* POST */
 router.post('/', function (req, res) {
-    // execFile: executes a file with the specified arguments
-    child_process.execFile('iperf3', ['-c', '192.168.1.102', '-J'], function (error, stdout, stderr) {
+    child_process.execFile('iperf3', ['-c', '192.168.1.102', '-J'], function (error, stdout, stderr) { //execute iperf3 with arguments
 
         console.log(stdout);
-
-        newResult = JSON.parse(stdout);
-
-
+        newResult = JSON.parse(stdout); //parse text output to JSON format
         console.log('\n \n \n \n \n \n');
-        console.dir(newResult);
+        console.log(newResult); //log results
 
         Result(newResult).save(function (err) {
             if (err) throw err;
-            console.log('Item added!');
+            console.log('Item added!'); //when added log in console
         });
-
     });
 });
-
-
-//function addResult(result) {
-//    Result(JSON.parse(result)).save(function (err) {
-//        console.log("Item added");
-//        res.send();
-//    });
-//};
-//
-//
-//newResult.save(function (err) {
-//    if (err) throw err;
-//
-//    console.log('Item added!');
-//});
-
 
 module.exports = router;

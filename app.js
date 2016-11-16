@@ -13,7 +13,6 @@ var users = require('./routes/users');
 var agents = require('./routes/agents');
 var settings = require('./routes/settings');
 var iperf = require('./controllers/iperf')
-var results = require('./routes/results')
 
 var app = express();
 
@@ -37,7 +36,6 @@ app.use('/agents', agents);
 app.use('/settings', settings);
 app.use('/create', agents);
 app.use('/iperf', iperf);
-app.use('/results', results);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
