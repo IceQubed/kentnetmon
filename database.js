@@ -7,13 +7,13 @@ var Comment = new Schema({
 
 var Result = new Schema({
     start: {
-        connected: {
+        connected: [{
             socket: Number,
             local_host: String,
             local_port: Number,
             remote_host: String,
             remote_port: Number
-        },
+        }],
         version: String,
         system_info: String,
         timestamp: {
@@ -37,8 +37,8 @@ var Result = new Schema({
             reverse: Number
         }
     },
-    intervals: {
-        streams: {
+    intervals: [{
+        streams: [{
             socket: Number,
             start: Number,
             end: Number,
@@ -46,7 +46,7 @@ var Result = new Schema({
             bytes: Number,
             bits_per_second: Number,
             omitted: Boolean
-        },
+        }],
         sum: {
             start: Number,
             end: Number,
@@ -55,9 +55,9 @@ var Result = new Schema({
             bits_per_second: Number,
             omitted: Boolean
         }
-    },
+    }],
     end: {
-        streams: {
+        streams: [{
             sender: {
                 socket: Number,
                 start: Number,
@@ -74,7 +74,7 @@ var Result = new Schema({
                 bytes: Number,
                 bits_per_second: Number
             }
-        },
+        }],
         sum_sent: {
             start: Number,
             end: Number,
