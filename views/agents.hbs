@@ -1,3 +1,21 @@
+<head>
+    <script>
+        function runTest() {
+            var xmlhttp;
+            xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "xmlhttp_info.txt", true);
+            xmlhttp.send();
+        }
+
+    </script>
+</head>
+
 <body>
 
     <header>
@@ -79,10 +97,15 @@
                     {{/each}}
                 </div>
                 <div class="controls">
+                    <button id="runTest" onclick="runTest()">Run Test</button>
+                </div>
+                <!--
+                <div class="controls">
                     <form method="post" action="/iperf">
                         <input type="submit" value="Run Test">
                     </form>
                 </div>
+-->
                 <div class="graph">
                     <img src="/images/graph.png" alt="Network Graph" style="width:300px;">
                     <div class="caption">Network Throughput</div>
