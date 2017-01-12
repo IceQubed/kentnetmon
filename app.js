@@ -38,6 +38,7 @@ app.use('/users', users);
 app.use('/agents', agents);
 app.use('/settings', settings);
 app.use('/create', agents);
+app.use('/addagent', addagent);
 app.use('/iperf', iperf);
 app.use('/graphs', graphs);
 app.use('/addagent', addagent);
