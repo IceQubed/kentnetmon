@@ -114,6 +114,7 @@ label {
     position: relative;
     float: right;
     margin-right: 10px;
+    max-width: 600px;
 }
 
 .caption {
