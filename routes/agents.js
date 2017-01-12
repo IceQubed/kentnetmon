@@ -6,21 +6,16 @@ var Agent = mongoose.model('agents');
 
 /* GET form. */
 router.get('/', function (req, res) {
-    Comment.find(function (err, comments) {
-        res.render(
-            'agents', {
-                title: 'KentNetMon Agents',
-                comments: comments
-            }
-        );
-    });
     Agent.find(function (err, agents) {
-        res.render(
-            'agents', {
-                title: 'KentNetMon Agents',
-                agents: agents
-            }
-        );
+        Comment.find(function (err, comments) {
+            res.render(
+                'agents', {
+                    title: 'KentNetMon Agents',
+                    comments: comments,
+                    agents: agents
+                }
+            );
+        });
     })
 });
 

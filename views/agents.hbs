@@ -1,5 +1,22 @@
 <head>
     <script>
+        function runTest(agentIPAddress) {
+            var xmlhttp;
+            xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "/iperf/" + agentIPAddress, true);
+            xmlhttp.send();
+        }
+
+    </script>
+
+    <!--
+    <script>
         function runTest() {
             var xmlhttp;
             xmlhttp = new XMLHttpRequest();
@@ -14,6 +31,7 @@
         }
 
     </script>
+-->
 </head>
 
 <body>
@@ -33,9 +51,48 @@
     </nav>
 
     <div class="content-container">
+
+        {{#each agents}}
+
         <div class="agents">
             <div class="agent">
-                <h2>Agent 1</h2>
+                <h2>{{this.name}}</h2>
+
+                <div class="stats">
+                    <table style="width:100%">
+                        <col width="120">
+                        <tr>
+                            <th>
+                                <h3>Statistics</h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>{{this.location}}</td>
+                        </tr>
+                        <tr>
+                            <th>IP Address</th>
+                            <td>{{this.ipAddr}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="controls">
+                    <button id="runTest" onclick="runTest('{{this.ipAddr}}')">Run Throughput Test</button>
+                    <p id="demo"></p>
+                </div>
+
+                <div class="graph">
+                    <img src="/images/graph.png" alt="Network Graph" style="width:300px;">
+                    <div class="caption">Network Throughput</div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+        <div class="agents">
+            <div class="agent">
+                <h2>Comments</h2>
                 <div class="stats">
                     <table style="width:100%">
                         <col width="120">
@@ -97,74 +154,8 @@
                     <li>{{this.title}}</li>
                     {{/each}}
                 </div>
-                <div class="controls">
-                    <button id="runTest" onclick="runTest()">Run Test</button>
-                    <p id="demo"></p>
 
-                    {{#each agents}}
-                    <li>{{this.name}}</li>
-                    {{/each}}
-                </div>
-
-                <div class="graph">
-                    <img src="/images/graph.png" alt="Network Graph" style="width:300px;">
-                    <div class="caption">Network Throughput</div>
-                </div>
             </div>
-            <div class=" agent ">
-                <h2>Agent 2</h2>
-                <div class="stats ">
-                    <table style="width:100% ">
-                        <col width="120 ">
-                        <tr>
-                            <th>
-                                <h3>Statistics</h3>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td>ONLINE</td>
-                        </tr>
-                        <tr>
-                            <th>Location</th>
-                            <td>EDGE</td>
-                        </tr>
-                        <tr>
-                            <th>Last Test</th>
-                            <td>13:58</td>
-                        </tr>
-                        <tr>
-                            <th>IP Address</th>
-                            <td>192.168.0.3</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th>
-                                <h3>Latest Test</h3>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>Speed</th>
-                            <td>67 Mbps</td>
-                        </tr>
-                        <tr>
-                            <th>Ping</th>
-                            <td>4 ms</td>
-                        </tr>
-                        <tr>
-                            <th>Jitter</th>
-                            <td>0 ms</td>
-                        </tr>
-                        <tr>
-                            <th>Packet Loss</th>
-                            <td>0%</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
         </div>
     </div>
     <footer class="footer ">© Ben Adamson</footer>
