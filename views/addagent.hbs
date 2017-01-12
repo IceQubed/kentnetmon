@@ -1,0 +1,39 @@
+<head>
+
+</head>
+
+<body>
+
+    <header>
+        <h2>{{title}}</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/agents">Agents</a></li>
+            <li><a href="/settings">Settings</a></li>
+            <li><a href="#">Log out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-container">
+        <div class="agents">
+            <div class="agent">
+                <h2>Add agent</h2>
+                <div class="commentbox">
+                    <form method="post" action="/create">
+                        <label for="agent_name">Agent name:</label>
+                        <input type="text" name="agent_name" value=""> <br>
+                        <label for="agent_name">Agent ip address:</label>
+                        <input type="text" name="agent_ipAddr" value=""> <br>
+                        <label for="agent_name">Agent physical location description:</label>
+                        <input type="text" name="agent_location" value=""> <br>
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer ">© Ben Adamson</footer>
+</body>

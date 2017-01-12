@@ -1,23 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Comment = mongoose.model('comments');
 var Agent = mongoose.model('agents');
 
 /* GET form. */
 router.get('/', function (req, res) {
-    Comment.find(function (err, comments) {
-        res.render(
-            'agents', {
-                title: 'KentNetMon Agents',
-                comments: comments
-            }
-        );
-    });
     Agent.find(function (err, agents) {
         res.render(
-            'agents', {
-                title: 'KentNetMon Agents',
+            'addagent', {
+                title: 'KentNetMon - Add Agent',
                 agents: agents
             }
         );
@@ -26,10 +17,12 @@ router.get('/', function (req, res) {
 
 /* POST form. */
 router.post('/', function (req, res) {
-    new Comment({
-            title: req.body.comment
+    new Agent({
+            ipAddr: req.body.agent_ipAddr,
+            name: req.body.agent_name,
+            location: req.body.agent_location
         })
-        .save(function (err, comment) {
+        .save(function (err, agent) {
             res.redirect('agents');
         });
 });

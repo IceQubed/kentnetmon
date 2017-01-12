@@ -5,7 +5,14 @@ var Comment = new Schema({
     title: String
 });
 
+var Agent = new Schema({
+    ipAddr: String,
+    name: String,
+    location: String,
+});
+
 var Result = new Schema({
+    agent: Agent,
     start: {
         connected: [{
             socket: Number,
@@ -100,14 +107,10 @@ var Result = new Schema({
     }
 })
 
-var Agent = new Schema({
-    ipAddr: String,
-    name: String,
-    location: String,
-});
 
+mongoose.model('agents', Agent);
 mongoose.model('comments', Comment);
 mongoose.model('results', Result);
-mongoose.model('agents', Agent);
+
 
 mongoose.connect('mongodb://localhost/kentnetmon');

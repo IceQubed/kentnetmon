@@ -5,7 +5,7 @@
             xmlhttp = new XMLHttpRequest();
 
             xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState == 4) {
                     document.getElementById("demo").innerHTML = this.responseText;
                 }
             };
@@ -98,14 +98,13 @@
                 </div>
                 <div class="controls">
                     <button id="runTest" onclick="runTest()">Run Test</button>
+                    <p id="demo"></p>
+
+                    {{#each agents}}
+                    <li>{{this.name}}</li>
+                    {{/each}}
                 </div>
-                <!--
-                <div class="controls">
-                    <form method="post" action="/iperf">
-                        <input type="submit" value="Run Test">
-                    </form>
-                </div>
--->
+
                 <div class="graph">
                     <img src="/images/graph.png" alt="Network Graph" style="width:300px;">
                     <div class="caption">Network Throughput</div>

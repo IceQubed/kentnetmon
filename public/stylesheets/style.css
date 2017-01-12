@@ -62,6 +62,10 @@ nav ul a {
     color: azure;
 }
 
+label {
+    line-height: 2em;
+}
+
 .agents {}
 
 .agent {
