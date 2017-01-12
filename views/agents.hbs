@@ -1,6 +1,6 @@
 <head>
     <script>
-        function runTest(agentIPAddress) {
+        function runTest(agentID) {
             var xmlhttp;
             xmlhttp = new XMLHttpRequest();
 
@@ -9,29 +9,11 @@
                     document.getElementById("demo").innerHTML = this.responseText;
                 }
             };
-            xmlhttp.open("GET", "/iperf/" + agentIPAddress, true);
+            xmlhttp.open("GET", "/iperf/" + agentID, true);
             xmlhttp.send();
         }
 
     </script>
-
-    <!--
-    <script>
-        function runTest() {
-            var xmlhttp;
-            xmlhttp = new XMLHttpRequest();
-
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                    document.getElementById("demo").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET", "/iperf/192.168.1.102", true);
-            xmlhttp.send();
-        }
-
-    </script>
--->
 </head>
 
 <body>
@@ -78,7 +60,7 @@
                 </div>
 
                 <div class="controls">
-                    <button id="runTest" onclick="runTest('{{this.ipAddr}}')">Run Throughput Test</button>
+                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test</button>
                     <p id="demo"></p>
                 </div>
 
