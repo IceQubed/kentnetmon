@@ -100,7 +100,18 @@ var Result = new Schema({
     }
 })
 
+var Agent = new Schema({
+    ipAddr: String,
+    lastTest: Date,
+    location: String,
+    lastTestSpeed: Number,
+    lastTestPing: Number,
+    lastTestJitter: Number,
+    lastTestPacketLoss: Number
+});
+
 mongoose.model('comments', Comment);
 mongoose.model('results', Result);
+mongoose.model('agents', Agent);
 
 mongoose.connect('mongodb://localhost/kentnetmon');
