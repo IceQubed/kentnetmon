@@ -9,10 +9,13 @@ var Agent = new Schema({
     ipAddr: String,
     name: String,
     location: String,
+    results: [{
+        type: Schema.Types.ObjectId,
+        ref: 'results'
+    }]
 });
 
 var Result = new Schema({
-    agent: Agent,
     start: {
         connected: [{
             socket: Number,

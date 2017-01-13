@@ -7,21 +7,14 @@ var Result = mongoose.model('results');
 
 /* GET form. */
 router.get('/', function (req, res) {
-    Agent.find(function (err, agents) {
-
-        Result.find({
-            'Agent.id': agents.id
-        }, function (err, results) {
-
-            res.render(
-                'agents', {
-                    title: 'KentNetMon Agents',
-                    agents: agents,
-                    results: results
-                }
-            );
-        })
-    })
+    Agent.find().populate('results').exec(function (err, agents) {
+        res.render(
+            'agents', {
+                title: 'KentNetMon Agents',
+                agents: agents
+            }
+        );
+    });
 });
 
 module.exports = router;
