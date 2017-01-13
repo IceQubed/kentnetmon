@@ -15,6 +15,7 @@ var settings = require('./routes/settings');
 var iperf = require('./controllers/iperf');
 var graphs = require('./routes/graphs');
 var addagent = require('./routes/addagent');
+var deleteagent = require('./routes/deleteagent');
 
 
 var app = express();
@@ -41,7 +42,7 @@ app.use('/create', agents);
 app.use('/addagent', addagent);
 app.use('/iperf', iperf);
 app.use('/graphs', graphs);
-app.use('/addagent', addagent);
+app.use('/deleteagent', deleteagent);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
