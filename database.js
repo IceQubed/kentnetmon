@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Comment = new Schema({
-    title: String
-});
+//var Comment = new Schema({
+//    title: String
+//});
 
 var Agent = new Schema({
     ipAddr: String,
@@ -109,7 +109,7 @@ var Result = new Schema({
 
 
 mongoose.model('agents', Agent);
-mongoose.model('comments', Comment);
+//mongoose.model('comments', Comment);
 mongoose.model('results', Result);
 
 

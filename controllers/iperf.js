@@ -4,7 +4,7 @@ var child_process = require('child_process');
 var mongoose = require('mongoose');
 var Result = mongoose.model('results');
 var newResult = new Result();
-var Comment = mongoose.model('comments');
+//var Comment = mongoose.model('comments');
 var Agent = mongoose.model('agents');
 
 router.get('/:agentid', function (req, res) {
