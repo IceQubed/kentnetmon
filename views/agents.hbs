@@ -113,6 +113,10 @@
                     <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test</button>
                     <button id="deleteAgent" onclick="deleteAgent('{{this.id}}')">Delete Agent</button>
                     <p id="demo"></p>
+
+                    {{#each results}}
+                    <li>{{this.end.sum_sent.bits_per_second}}</li>
+                    {{/each}}
                 </div>
 
                 <div class="graph">

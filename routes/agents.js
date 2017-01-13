@@ -1,21 +1,46 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-//var Comment = mongoose.model('comments');
 var Agent = mongoose.model('agents');
+var Result = mongoose.model('results');
 
 
 /* GET form. */
 router.get('/', function (req, res) {
     Agent.find(function (err, agents) {
-        res.render(
-            'agents', {
-                title: 'KentNetMon Agents',
-                agents: agents
-            }
-        );
+
+        Result.find({
+            'Agent.id': agents.id
+        }, function (err, results) {
+
+            res.render(
+                'agents', {
+                    title: 'KentNetMon Agents',
+                    agents: agents,
+                    results: results
+                }
+            );
+        })
     })
 });
+
+module.exports = router;
+
+
+
+
+
+///* GET form. */
+//router.get('/', function (req, res) {
+//    Agent.find(function (err, agents) {
+//        res.render(
+//            'agents', {
+//                title: 'KentNetMon Agents',
+//                agents: agents
+//            }
+//        );
+//    })
+//});
 
 
 ///* GET form. */
@@ -33,15 +58,3 @@ router.get('/', function (req, res) {
 //    })
 //});
 //
-///* POST form. */
-//router.post('/', function (req, res) {
-//    new Comment({
-//            title: req.body.comment
-//        })
-//        .save(function (err, comment) {
-//            res.redirect('agents');
-//        });
-//});
-
-
-module.exports = router;
