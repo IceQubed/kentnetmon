@@ -25,19 +25,23 @@
 
     <script>
         function deleteAgent(agentID) {
-            var xmlhttp;
-            xmlhttp = new XMLHttpRequest();
+            if (confirm("Are you sure you want to delete this agent? \nAgents cannot be undeleted and will have to be re-added!")) {
+                var xmlhttp;
+                xmlhttp = new XMLHttpRequest();
 
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                    document.getElementById("demo").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET", "/deleteagent/" + agentID, true);
-            xmlhttp.send();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "/deleteagent/" + agentID, true);
+                xmlhttp.send();
+            }
+
         }
 
     </script>
+
 </head>
 
 <body>
@@ -77,13 +81,35 @@
                             <td>{{this.location}}</td>
                         </tr>
                         <tr>
-                            <th>IP Address</th>
+                            <th>Network Address</th>
                             <td>{{this.ipAddr}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h3>Latest Test</h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Speed</th>
+                            <td>N/A Mbps</td>
+                        </tr>
+                        <tr>
+                            <th>Latency</th>
+                            <td>N/A ms</td>
+                        </tr>
+                        <tr>
+                            <th>Jitter</th>
+                            <td>N/A ms</td>
+                        </tr>
+                        <tr>
+                            <th>Packet Loss</th>
+                            <td>N/A %</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="controls">
+                    <h3>Controls</h3><br>
                     <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test</button>
                     <button id="deleteAgent" onclick="deleteAgent('{{this.id}}')">Delete Agent</button>
                     <p id="demo"></p>
