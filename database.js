@@ -12,6 +12,10 @@ var Agent = new Schema({
     results: [{
         type: Schema.Types.ObjectId,
         ref: 'results'
+    }],
+    resultsudp: [{
+        type: Schema.Types.ObjectId,
+        ref: 'resultsudp'
     }]
 });
 
@@ -110,10 +114,101 @@ var Result = new Schema({
     }
 })
 
+var ResultUDP = new Schema({
+    start: {
+        connected: [{
+            socket: Number,
+            local_host: String,
+            local_port: Number,
+            remote_host: String,
+            remote_port: Number
+        }],
+        version: String,
+        system_info: String,
+        timestamp: {
+            time: Date,
+            timesecs: Number
+        },
+        connecting_to: {
+            host: String,
+            port: Number
+        },
+        cookie: String,
+        tcp_mss_default: Number,
+        test_start: {
+            protocol: String,
+            num_streams: Number,
+            blksize: Number,
+            omit: Number,
+            duration: Number,
+            bytes: Number,
+            blocks: Number,
+            reverse: Number
+        }
+    },
+    intervals: [{
+        streams: [{
+            socket: Number,
+            start: Number,
+            end: Number,
+            seconds: Number,
+            bytes: Number,
+            bits_per_second: Number,
+            packets: Number,
+            omitted: Boolean
+        }],
+        sum: {
+            start: Number,
+            end: Number,
+            seconds: Number,
+            bytes: Number,
+            bits_per_second: Number,
+            packets: Number,
+            omitted: Boolean
+        }
+    }],
+    end: {
+        streams: [{
+            udp: {
+                socket: Number,
+                start: Number,
+                end: Number,
+                seconds: Number,
+                bytes: Number,
+                bits_per_second: Number,
+                jitter_ms: Number,
+                lost_packets: Number,
+                packets: Number,
+                lost_percent: Number,
+                out_of_order: Number
+            }
+        }],
+        sum: {
+            start: Number,
+            end: Number,
+            seconds: Number,
+            bytes: Number,
+            bits_per_second: Number,
+            jitter_ms: Number,
+            lost_packets: Number,
+            packets: Number,
+            lost_percent: Number
+        },
+        cpu_utilization_percent: {
+            host_total: Number,
+            host_user: Number,
+            host_system: Number,
+            remote_total: Number,
+            remote_user: Number,
+            remote_system: Number,
+        }
+    }
+})
+
 
 mongoose.model('agents', Agent);
-//mongoose.model('comments', Comment);
 mongoose.model('results', Result);
+mongoose.model('resultsudp', ResultUDP)
 
 
 mongoose.connect('mongodb://localhost/kentnetmon');

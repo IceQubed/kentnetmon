@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var agents = require('./routes/agents');
 var settings = require('./routes/settings');
 var iperf = require('./controllers/iperf');
+var iperfudp = require('./controllers/iperfudp');
 var graphs = require('./routes/graphs');
 var addagent = require('./routes/addagent');
 var deleteagent = require('./routes/deleteagent');
@@ -41,6 +42,7 @@ app.use('/settings', settings);
 app.use('/create', agents);
 app.use('/addagent', addagent);
 app.use('/iperf', iperf);
+app.use('/iperfudp', iperfudp);
 app.use('/graphs', graphs);
 app.use('/deleteagent', deleteagent);
 
