@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var agents = require('./routes/agents');
+//var agents = require('./routes/agents');
 var settings = require('./routes/settings');
 var iperf = require('./controllers/iperf');
 var iperfudp = require('./controllers/iperfudp');
@@ -37,9 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/agents', agents);
+//app.use('/agents', agents);
 app.use('/settings', settings);
-app.use('/create', agents);
+//app.use('/create', agents);
 app.use('/addagent', addagent);
 app.use('/iperf', iperf);
 app.use('/iperfudp', iperfudp);

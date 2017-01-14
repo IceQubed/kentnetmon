@@ -8,13 +8,18 @@ router.get('/:agentid', function (req, res) {
     Agent
         .findById(req.params.agentid)
         .populate('results')
+        .populate('resultsudp')
         .exec(function (err, agent) {
             var results = agent.results.map(function (result) {
                 return result.end.sum_sent.bits_per_second;
             });
+            var lostpackets = agent.resultsudp.map(function (lostpacket) {
+                return lostpacket.end.sum.lost_percent;
+            });
 
             res.status(200).json({
-                results: results
+                results: results,
+                lostpackets: lostpackets
             });
         });
 });
