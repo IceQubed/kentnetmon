@@ -76,6 +76,7 @@ label {
     border-radius: 5px;
     display: block;
     width: 100%;
+    line-height: 1.4em;
 }
 
 .content-container {
@@ -87,21 +88,9 @@ label {
     border-radius: 3px;
     float: left;
     margin-top: 10px;
+    margin-left: 7px;
     width: 300px;
 }
-
-
-/*
-.commentbox {
-    border: 1px solid #434343;
-    border-radius: 3px;
-    float: left;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 230px;
-    padding: 5px;
-}
-*/
 
 .controls {
     border: 1px solid #434343;
@@ -109,15 +98,25 @@ label {
     float: left;
     margin-top: 10px;
     margin-left: 10px;
-    /*    width: 230px;*/
+    width: 240px;
     padding: 5px;
 }
 
-.graph {
+.graphcontainer {
+    border: 1px solid #434343;
+    border-radius: 3px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
     position: relative;
-    float: right;
-    margin-right: 10px;
-    max-width: 600px;
+}
+
+.graph {
+    position: absolute;
+    float: left;
+    margin-left: 20px;
+    width: 1140px;
 }
 
 .caption {

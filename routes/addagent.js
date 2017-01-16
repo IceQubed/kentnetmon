@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
             location: req.body.agent_location
         })
         .save(function (err, agent) {
-            res.redirect('agents');
+            res.redirect('/');
         });
 });
 

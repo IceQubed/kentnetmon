@@ -99,7 +99,8 @@
                         </tr>
                         <tr>
                             <th>
-                                <h3>Latest Test</h3>
+                                <br>
+                                <em>Latest Test</em>
                             </th>
                         </tr>
                         <tr>
@@ -109,6 +110,7 @@
                         <tr>
                             <th>Latency</th>
                             <td>N/A ms</td>
+                            <td>{{this.results.end.sum.lost_percent}}</td>
                         </tr>
                         <tr>
                             <th>Jitter</th>
@@ -123,13 +125,15 @@
 
                 <div class="controls">
                     <h3>Controls</h3><br>
-                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button>
-                    <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button>
+                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button> <br> <br>
+                    <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button> <br> <br>
                     <button id="deleteAgent" onclick="deleteAgent('{{this.id}}')">Delete Agent</button>
                     <p id="demo"></p>
                 </div>
 
-                <div class="graph" data-agent-id="{{this.id}}">
+                <div class="graphcontainer">
+                    <div class="graph" data-agent-id="{{this.id}}">
+                    </div>
                 </div>
             </div>
         </div>
