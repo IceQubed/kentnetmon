@@ -104,13 +104,16 @@
                             </th>
                         </tr>
                         <tr>
+                            <th>Date</th>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
                             <th>Throughput</th>
                             <td>N/A Mbps</td>
                         </tr>
                         <tr>
                             <th>Latency</th>
                             <td>N/A ms</td>
-                            <td>{{this.results.end.sum.lost_percent}}</td>
                         </tr>
                         <tr>
                             <th>Jitter</th>
@@ -137,7 +140,7 @@
                 </div>
             </div>
         </div>
-        {{/each}}
+        {{/each}} {{#each testDate}} {{this}} {{/each}}<br> {{#each throughput}} {{this}} {{/each}}<br>
 
     </div>
     <footer class="footer ">© Ben Adamson</footer>

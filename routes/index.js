@@ -8,18 +8,49 @@ var Result = mongoose.model('results');
 /* GET form. */
 router.get('/', function (req, res) {
     Agent.find().populate('results').exec(function (err, agents) {
+        //        var agentList = {testDate[], throughput[], latency[], jitter[], packetloss[]};
+        //
+        //        for (var i = 0; i < agents.length; i += 1) {
+        //            agentList.testDate[i] = agents[i].results[agents[i].results.length - 1].start.timestamp.time;
+        //            agentList.throughput[i] = agents[i].results[agents[i].results.length - 1].end.sum_received.bits_per_second;
+        //
+        //
+        ////            latency[i] = 1;
+        ////            jitter[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.jitter_ms;
+        ////            packetLoss[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.lost_percent;
+        //        }
+        //
+        var testDate = [],
+            throughput = [],
+            latency = [],
+            jitter = [],
+            packetLoss = [];
+
+        for (var i = 0; i < agents.length; i += 1) {
+            testDate[i] = agents[i].results[agents[i].results.length - 1].start.timestamp.time;
+            throughput[i] = agents[i].results[agents[i].results.length - 1].end.sum_received.bits_per_second;
+            //            latency[i] = 1;
+            //            jitter[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.jitter_ms;
+            //            packetLoss[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.lost_percent;
+        }
+
+
+
         res.render(
             'agents', {
                 title: 'KentNetMon Agents',
-                agents: agents
+                agents: agents,
+                testDate: testDate,
+                throughput: throughput,
+                latency: latency,
+                jitter: jitter,
+                packetLoss: packetLoss
             }
         );
     });
 });
 
 module.exports = router;
-
-
 
 
 
