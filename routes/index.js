@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
             jitter = [],
             packetLoss = [];
 
-        for (var i = 0; i < agents.length; i += 1) {
+        for (var i = 0; i < agents.length - 1; i += 1) {
             testDate[i] = agents[i].results[agents[i].results.length - 1].start.timestamp.time;
             throughput[i] = agents[i].results[agents[i].results.length - 1].end.sum_received.bits_per_second;
             //            latency[i] = 1;

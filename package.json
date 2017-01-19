@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon --inspect start.js"
+        "start": "nodemon start.js"
     },
     "dependencies": {
         "body-parser": "~1.15.1",
