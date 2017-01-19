@@ -12,7 +12,8 @@ router.get('/:agentid', function (req, res) {
             var newResult = new Result();
 
             console.log(stdout);
-            newResult = JSON.parse(stdout); //parse text output to JSON format
+            try{
+                newResult = JSON.parse(stdout); //parse text output to JSON format
             console.log('\n \n \n \n \n \n');
             console.log(newResult); //log results
 
@@ -40,6 +41,11 @@ router.get('/:agentid', function (req, res) {
                     console.log('Item added!'); //when added log in console
                 });
             });
+            }
+            catch(err){
+                console.log('BAD IPERF TEST!')
+            }
+
         });
     });
 });

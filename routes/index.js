@@ -24,14 +24,21 @@ router.get('/', function (req, res) {
             throughput = [],
             latency = [],
             jitter = [],
-            packetLoss = [];
+            packetLoss = [],
+            error = [];
 
         for (var i = 0; i < agents.length - 1; i += 1) {
-            testDate[i] = agents[i].results[agents[i].results.length - 1].start.timestamp.time;
-            throughput[i] = agents[i].results[agents[i].results.length - 1].end.sum_received.bits_per_second;
+            try{
+                testDate[i] = agents[i].results[agents[i].results.length - 1].start.timestamp.time;
+                throughput[i] = agents[i].results[agents[i].results.length - 1].end.sum_received.bits_per_second;
             //            latency[i] = 1;
             //            jitter[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.jitter_ms;
             //            packetLoss[i] = agents[i].resultsudp[agents[i].results.length - 1].end.sum.lost_percent;
+            }
+            catch(err){
+                error[i] = err.message;
+            }
+
         }
 
 
