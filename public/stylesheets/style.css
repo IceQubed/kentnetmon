@@ -125,14 +125,12 @@ label {
 .graphTCP {
     position: absolute;
     float: left;
-    margin-left: 20px;
     width: 500px;
 }
 
 .graphUDP {
     position: absolute;
     float: left;
-    margin-left: 20px;
     width: 500px;
 }
 

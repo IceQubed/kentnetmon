@@ -26,7 +26,7 @@ function generateChartTCP(container, agentId) {
                     },
                     y: {
                         label: {
-                            text: 'Mbps',
+                            text: 'Throughput (Mbps)',
                             position: 'outer-top'
                         },
                         tick: {

@@ -19,8 +19,8 @@ function generateChartUDP(container, agentId) {
                 data: {
                     //                    columns: [jitter]
                     columns: [
-                        [jitter],
-                        [lostpackets]
+                        jitter,
+                        lostpackets
                     ],
                     axes: {
                         [jitter[0]]: 'y',
@@ -33,7 +33,7 @@ function generateChartUDP(container, agentId) {
                     },
                     y: {
                         label: {
-                            text: '%',
+                            text: 'Jitter (%)',
                             position: 'outer-top'
                         },
                         tick: {
@@ -43,7 +43,7 @@ function generateChartUDP(container, agentId) {
                     y2: {
                         show: true,
                         label: {
-                            text: '%',
+                            text: 'Packet loss (%)',
                             position: 'outer-top'
                         },
                         tick: {
