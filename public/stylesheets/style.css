@@ -112,11 +112,28 @@ label {
     position: relative;
 }
 
-.graph {
+.graphcontainerasdas {
+    border: 1px solid #434343;
+    border-radius: 3px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    position: relative;
+}
+
+.graphTCP {
     position: absolute;
     float: left;
     margin-left: 20px;
-    width: 1140px;
+    width: 500px;
+}
+
+.graphUDP {
+    position: absolute;
+    float: left;
+    margin-left: 20px;
+    width: 500px;
 }
 
 .caption {

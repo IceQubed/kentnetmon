@@ -15,6 +15,7 @@ var settings = require('./routes/settings');
 var iperf = require('./controllers/iperf');
 var iperfudp = require('./controllers/iperfudp');
 var graphs = require('./routes/graphs');
+var graphsudp = require('./routes/graphsUDP');
 var addagent = require('./routes/addagent');
 var deleteagent = require('./routes/deleteagent');
 
@@ -44,6 +45,7 @@ app.use('/addagent', addagent);
 app.use('/iperf', iperf);
 app.use('/iperfudp', iperfudp);
 app.use('/graphs', graphs);
+app.use('/graphsUDP', graphsudp);
 app.use('/deleteagent', deleteagent);
 
 // catch 404 and forward to error handler

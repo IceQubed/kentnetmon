@@ -7,14 +7,18 @@ var Agent = mongoose.model('agents');
 router.get('/:agentid', function (req, res) {
     Agent
         .findById(req.params.agentid)
-        .populate('results')
+        .populate('resultsudp')
         .exec(function (err, agent) {
-            var results = agent.results.map(function (result) {
-                return result.end.sum_sent.bits_per_second;
+            var lostpackets = agent.resultsudp.map(function (lostpacket) {
+                return lostpacket.end.sum.lost_percent;
+            });
+            var jitter = agent.resultsudp.map(function (jitter) {
+                return jitter.end.sum.jitter_ms;
             });
 
             res.status(200).json({
-                results: results
+                lostpackets: lostpackets,
+                jitter: jitter
             });
         });
 });

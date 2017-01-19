@@ -8,8 +8,32 @@
 
 
     <script>
+        function startTimer(duration, display) {
+            var timer = duration,
+                minutes, seconds;
+            setInterval(function() {
+                minutes = parseInt(timer / 60, 10)
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds + " left in test before page refresh";
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+    </script>
+
+    <script>
         function runTest(agentID) {
-            var xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest(),
+                timerTime = 10,
+                timerRefreshTime = 10100,
+                display = document.querySelector('#runTestTimer');
 
             xmlhttp.addEventListener('readystatechange', function() {
                 if (this.readyState == 4) {
@@ -18,13 +42,22 @@
             });
             xmlhttp.open('GET', '/iperf/' + agentID, true);
             xmlhttp.send();
+
+
+            startTimer(timerTime, display);
+            setTimeout(function() {
+                location.reload();
+            }, timerRefreshTime);
         }
 
     </script>
 
     <script>
         function runTestUDP(agentID) {
-            var xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest(),
+                timerTime = 10,
+                timerRefreshTime = 10100,
+                display = document.querySelector('#runTestUDPTimer');
 
             xmlhttp.addEventListener('readystatechange', function() {
                 if (this.readyState == 4) {
@@ -33,6 +66,10 @@
             });
             xmlhttp.open('GET', '/iperfudp/' + agentID, true);
             xmlhttp.send();
+            startTimer(timerTime, display);
+            setTimeout(function() {
+                location.reload();
+            }, timerRefreshTime);
         }
 
     </script>
@@ -129,15 +166,20 @@
 
                 <div class="controls">
                     <h3>Controls</h3><br>
-                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button> <br> <br>
-                    <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button> <br> <br>
+                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button> <br>
+                    <span id="runTestTimer"></span><br>
+                    <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button> <br>
+                    <span id="runTestUDPTimer"></span><br>
                     <button id="deleteAgent" onclick="deleteAgent('{{this.id}}')">Delete Agent</button>
                     <p id="demo"></p>
                 </div>
 
                 <div class="graphcontainer">
-                    <div class="graph" data-agent-id="{{this.id}}">
-                    </div>
+                    <div class="graphTCP" data-agent-tcp-id="{{this.id}}"></div>
+                </div>
+
+                <div class="graphcontainer">
+                    <div class="graphUDP" data-agent-udp-id="{{this.id}}"></div>
                 </div>
             </div>
         </div>
@@ -147,4 +189,5 @@
     <footer class="footer ">© Ben Adamson</footer>
 
     <script src="/javascripts/graphs.js"></script>
+    <script src="/javascripts/graphsUDP.js"></script>
 </body>
