@@ -7,6 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
 
+
+
     <script>
         function startTimer(duration, display) {
             var timer = duration,
@@ -31,8 +33,8 @@
     <script>
         function runTest(agentID) {
             var xmlhttp = new XMLHttpRequest(),
-                timerTime = 10,
-                timerRefreshTime = 10500,
+                timerTime = 11,
+                timerRefreshTime = 11000,
                 display = document.querySelector('#runTestTimer');
 
             xmlhttp.addEventListener('readystatechange', function() {
@@ -43,20 +45,16 @@
             xmlhttp.open('GET', '/iperf/' + agentID, true);
             xmlhttp.send();
 
-
             startTimer(timerTime, display);
             setTimeout(function() {
                 location.reload();
             }, timerRefreshTime);
         }
 
-    </script>
-
-    <script>
         function runTestUDP(agentID) {
             var xmlhttp = new XMLHttpRequest(),
-                timerTime = 10,
-                timerRefreshTime = 10500,
+                timerTime = 11,
+                timerRefreshTime = 11000,
                 display = document.querySelector('#runTestUDPTimer');
 
             xmlhttp.addEventListener('readystatechange', function() {
@@ -66,10 +64,46 @@
             });
             xmlhttp.open('GET', '/iperfudp/' + agentID, true);
             xmlhttp.send();
+
             startTimer(timerTime, display);
             setTimeout(function() {
                 location.reload();
             }, timerRefreshTime);
+        }
+
+        function runBoth(agentID) {
+            var test1 = new XMLHttpRequest(),
+                test2 = new XMLHttpRequest(),
+                runTime = 25,
+                refreshTime = 25000,
+                test1Time = 13000,
+                display = document.querySelector('#runTestBothTimer');
+
+            test1.addEventListener('readystatechange', function() {
+                if (this.readyState == 4) {
+                    document.getElementById('demo').innerHTML = 'this.responseText';
+                }
+            });
+            test1.open('GET', '/iperfudp/' + agentID, true);
+            test1.send();
+
+            test2.addEventListener('readystatechange', function() {
+                if (this.readyState == 4) {
+                    document.getElementById('demo').innerHTML = 'this.responseText';
+                }
+            });
+
+
+            setTimeout(function() {
+                test2.open('GET', '/iperf/' + agentID, true);
+                test2.send();
+            }, test1Time);
+
+
+            startTimer(runTime, display);
+            setTimeout(function() {
+                location.reload();
+            }, refreshTime);
         }
 
     </script>
@@ -105,7 +139,6 @@
     <nav>
         <ul>
             <li><a href="/">Dashboard</a></li>
-            <!--            <li><a href="/agents">Agents</a></li>-->
             <li><a href="/addagent">Add Agent</a></li>
             <li><a href="/settings">Settings</a></li>
             <li><a href="#">Log out</a></li>
@@ -113,20 +146,21 @@
     </nav>
 
     <div class="content-container">
-
         {{#each agents}}
         <div class="agents">
             <div class="agent">
-                <h2>{{this.name}}</h2>
 
-                <div class="stats">
+                <h1> {{this.name}}</h1>
+
+                <div class="statsandcontrols">
                     <table style="width:100%">
                         <col width="120">
                         <tr>
                             <th>
-                                <h3>Statistics</h3>
+                                <h2>Details</h2>
                             </th>
                         </tr>
+                        <tr></tr>
                         <tr>
                             <th>Location</th>
                             <td>{{this.location}}</td>
@@ -135,37 +169,11 @@
                             <th>Network Address</th>
                             <td>{{this.ipAddr}}</td>
                         </tr>
-                        <tr>
-                            <th>
-                                <br>
-                                <em>Latest Test</em>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>Date</th>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <th>Throughput</th>
-                            <td>N/A Mbps</td>
-                        </tr>
-                        <tr>
-                            <th>Latency</th>
-                            <td>N/A ms</td>
-                        </tr>
-                        <tr>
-                            <th>Jitter</th>
-                            <td>N/A ms</td>
-                        </tr>
-                        <tr>
-                            <th>Packet Loss</th>
-                            <td>N/A %</td>
-                        </tr>
-                    </table>
-                </div>
+                    </table> <br>
 
-                <div class="controls">
-                    <h3>Controls</h3><br>
+                    <h2>Controls</h2><br>
+                    <button id="runTestBoth" onclick="runBoth('{{this.id}}')">Run Both Tests (TCP & UDP)</button> <br>
+                    <span id="runTestBothTimer"></span><br>
                     <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button> <br>
                     <span id="runTestTimer"></span><br>
                     <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button> <br>
@@ -183,7 +191,7 @@
                 </div>
             </div>
         </div>
-        {{/each}} {{#each testDate}} {{this}} {{/each}}<br> {{#each throughput}} {{this}} {{/each}}<br>
+        {{/each}}
 
     </div>
     <footer class="footer ">© Ben Adamson</footer>

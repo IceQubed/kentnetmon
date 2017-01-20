@@ -83,22 +83,14 @@ label {
     margin: 5px 15px 10px 110px;
 }
 
-.stats {
+.statsandcontrols {
     border: 1px solid #434343;
     border-radius: 3px;
     float: left;
-    margin-top: 10px;
-    margin-left: 7px;
+    /*    margin-top: 10px;*/
+    margin-left: 5px;
     width: 300px;
-}
-
-.controls {
-    border: 1px solid #434343;
-    border-radius: 3px;
-    float: left;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 240px;
+    height: 350px;
     padding: 5px;
 }
 
@@ -106,17 +98,7 @@ label {
     border: 1px solid #434343;
     border-radius: 3px;
     float: left;
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 5px;
-    position: relative;
-}
-
-.graphcontainerasdas {
-    border: 1px solid #434343;
-    border-radius: 3px;
-    float: left;
-    margin-top: 10px;
+    margin-bottom: 5px;
     margin-left: 10px;
     padding: 5px;
     position: relative;
@@ -125,13 +107,15 @@ label {
 .graphTCP {
     position: absolute;
     float: left;
-    width: 500px;
+    width: 480px;
+    height: 350px;
 }
 
 .graphUDP {
     position: absolute;
     float: left;
-    width: 500px;
+    width: 480px;
+    height: 350px;
 }
 
 .caption {
