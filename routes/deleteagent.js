@@ -5,7 +5,11 @@ var Agent = mongoose.model('agents');
 
 
 router.get('/:agentid', function (req, res) {
-    Agent.findByIdAndRemove(req.params.agentid, function (err, agent) {});
+    Agent.findByIdAndRemove(req.params.agentid, function (err, agent) {
+        res.status(200).json({
+            ok: true
+        });
+    });
 });
 
 

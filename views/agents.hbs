@@ -6,9 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
-
-
-
     <script>
         function startTimer(duration, display) {
             var timer = duration,
@@ -29,105 +26,6 @@
         }
 
     </script>
-
-    <script>
-        function runTest(agentID) {
-            var xmlhttp = new XMLHttpRequest(),
-                timerTime = 11,
-                timerRefreshTime = 11000,
-                display = document.querySelector('#runTestTimer');
-
-            xmlhttp.addEventListener('readystatechange', function() {
-                if (this.readyState == 4) {
-                    document.getElementById('demo').innerHTML = 'this.responseText';
-                }
-            });
-            xmlhttp.open('GET', '/iperf/' + agentID, true);
-            xmlhttp.send();
-
-            startTimer(timerTime, display);
-            setTimeout(function() {
-                location.reload();
-            }, timerRefreshTime);
-        }
-
-        function runTestUDP(agentID) {
-            var xmlhttp = new XMLHttpRequest(),
-                timerTime = 11,
-                timerRefreshTime = 11000,
-                display = document.querySelector('#runTestUDPTimer');
-
-            xmlhttp.addEventListener('readystatechange', function() {
-                if (this.readyState == 4) {
-                    document.getElementById('demo').innerHTML = 'this.responseText';
-                }
-            });
-            xmlhttp.open('GET', '/iperfudp/' + agentID, true);
-            xmlhttp.send();
-
-            startTimer(timerTime, display);
-            setTimeout(function() {
-                location.reload();
-            }, timerRefreshTime);
-        }
-
-        function runBoth(agentID) {
-            var test1 = new XMLHttpRequest(),
-                test2 = new XMLHttpRequest(),
-                runTime = 25,
-                refreshTime = 25000,
-                test1Time = 13000,
-                display = document.querySelector('#runTestBothTimer');
-
-            test1.addEventListener('readystatechange', function() {
-                if (this.readyState == 4) {
-                    document.getElementById('demo').innerHTML = 'this.responseText';
-                }
-            });
-            test1.open('GET', '/iperfudp/' + agentID, true);
-            test1.send();
-
-            test2.addEventListener('readystatechange', function() {
-                if (this.readyState == 4) {
-                    document.getElementById('demo').innerHTML = 'this.responseText';
-                }
-            });
-
-
-            setTimeout(function() {
-                test2.open('GET', '/iperf/' + agentID, true);
-                test2.send();
-            }, test1Time);
-
-
-            startTimer(runTime, display);
-            setTimeout(function() {
-                location.reload();
-            }, refreshTime);
-        }
-
-    </script>
-
-    <script>
-        function deleteAgent(agentID) {
-            if (confirm('Are you sure you want to delete this agent? \nAgents cannot be undeleted and will have to be re-added!')) {
-                var xmlhttp;
-                xmlhttp = new XMLHttpRequest();
-
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4) {
-                        document.getElementById('demo').innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open('GET', '/deleteagent/' + agentID, true);
-                xmlhttp.send();
-                location.reload();
-            }
-
-        }
-
-    </script>
-
 </head>
 
 <body>
@@ -146,56 +44,59 @@
     </nav>
 
     <div class="content-container">
-        {{#each agents}}
         <div class="agents">
-            <div class="agent">
+            {{#each agents}}
+            <div class="agent" data-id="{{this.id}}">
+                <h1>{{this.name}} <span data-purpose="status"></span></h1>
 
-                <h1> {{this.name}}</h1>
+                <div>
+                    <div class="statsandcontrols">
+                        <table style="width:100%">
+                            <col width="120">
+                            <tr>
+                                <th>
+                                    <h2>Details</h2>
+                                </th>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>{{this.location}}</td>
+                            </tr>
+                            <tr>
+                                <th>Network Address</th>
+                                <td>{{this.ipAddr}}</td>
+                            </tr>
+                            <tr>
+                                <th>uashdaus</th>
+                                <td>{{this.jitter}}</td>
+                            </tr>
+                        </table>
 
-                <div class="statsandcontrols">
-                    <table style="width:100%">
-                        <col width="120">
-                        <tr>
-                            <th>
-                                <h2>Details</h2>
-                            </th>
-                        </tr>
-                        <tr></tr>
-                        <tr>
-                            <th>Location</th>
-                            <td>{{this.location}}</td>
-                        </tr>
-                        <tr>
-                            <th>Network Address</th>
-                            <td>{{this.ipAddr}}</td>
-                        </tr>
-                    </table> <br>
+                        <nav>
+                            <h2>Controls</h2>
+                            <button data-action="run-tests">Run Both Tests (TCP & UDP)</button>
+                            <button data-action="run-test-tcp">Run Throughput Test (TCP)</button>
+                            <button data-action="run-test-udp">Run Jitter & Packet Loss Test (UDP)</button>
+                            <button data-action="delete">Delete Agent</button>
+                        </nav>
+                    </div>
 
-                    <h2>Controls</h2><br>
-                    <button id="runTestBoth" onclick="runBoth('{{this.id}}')">Run Both Tests (TCP & UDP)</button> <br>
-                    <span id="runTestBothTimer"></span><br>
-                    <button id="runTest" onclick="runTest('{{this.id}}')">Run Throughput Test (TCP)</button> <br>
-                    <span id="runTestTimer"></span><br>
-                    <button id="runTestUDP" onclick="runTestUDP('{{this.id}}')">Run Jitter & Packet Loss Test (UDP)</button> <br>
-                    <span id="runTestUDPTimer"></span><br>
-                    <button id="deleteAgent" onclick="deleteAgent('{{this.id}}')">Delete Agent</button>
-                    <p id="demo"></p>
-                </div>
+                    <div class="graphcontainer">
+                        <div class="graphTCP" data-agent-tcp-id="{{this.id}}"></div>
+                    </div>
 
-                <div class="graphcontainer">
-                    <div class="graphTCP" data-agent-tcp-id="{{this.id}}"></div>
-                </div>
-
-                <div class="graphcontainer">
-                    <div class="graphUDP" data-agent-udp-id="{{this.id}}"></div>
+                    <div class="graphcontainer">
+                        <div class="graphUDP" data-agent-udp-id="{{this.id}}"></div>
+                    </div>
                 </div>
             </div>
+            {{/each}}
         </div>
-        {{/each}}
-
     </div>
     <footer class="footer ">© Ben Adamson</footer>
 
+    <script src="/javascripts/agent.js"></script>
     <script src="/javascripts/graphs.js"></script>
     <script src="/javascripts/graphsUDP.js"></script>
 </body>

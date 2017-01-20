@@ -38,7 +38,7 @@ th {
     float: left;
 }
 
-nav {
+body>nav {
     float: left;
     position: relative;
     width: 100px;
@@ -50,12 +50,12 @@ nav {
     color: azure;
 }
 
-nav ul {
+body>nav ul {
     list-style-type: none;
     padding: 1em;
 }
 
-nav ul a {
+body>nav ul a {
     text-decoration: none;
     display: block;
     padding-bottom: 10px;
@@ -70,52 +70,59 @@ label {
 
 .agent {
     padding: 3px;
-    float: left;
     margin: 5px 0px 5px 0px;
     border: 5px solid #434343;
     border-radius: 5px;
-    display: block;
-    width: 100%;
     line-height: 1.4em;
 }
 
+.agent>div {
+    display: flex;
+}
+
+.agent>div>*+* {
+    margin-left: 5px;
+}
+
 .content-container {
-    margin: 5px 15px 10px 110px;
+    margin: 5px 0 10px 110px;
 }
 
 .statsandcontrols {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid #434343;
     border-radius: 3px;
-    float: left;
-    /*    margin-top: 10px;*/
-    margin-left: 5px;
-    width: 300px;
-    height: 350px;
     padding: 5px;
+}
+
+.statsandcontrols nav h2 {
+    margin-bottom: 0.25em;
+}
+
+.statsandcontrols nav button {
+    display: block;
+    width: 100%;
+}
+
+.statsandcontrols nav button+button {
+    margin-top: 0.5em;
 }
 
 .graphcontainer {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border: 1px solid #434343;
     border-radius: 3px;
-    float: left;
-    margin-bottom: 5px;
-    margin-left: 10px;
     padding: 5px;
-    position: relative;
 }
 
-.graphTCP {
-    position: absolute;
-    float: left;
-    width: 480px;
-    height: 350px;
-}
-
-.graphUDP {
-    position: absolute;
-    float: left;
-    width: 480px;
-    height: 350px;
+.graphcontainer svg {
+    width: 100%;
 }
 
 .caption {
