@@ -52,7 +52,7 @@
                 <div>
                     <div class="statsandcontrols">
                         <table style="width:100%">
-                            <col width="120">
+                            <col width="170">
                             <tr>
                                 <th>
                                     <h2>Details</h2>
@@ -74,13 +74,18 @@
                                     <h2><br>Latest Test</h2>
                                 </th>
                             </tr>
+                            <tr></tr>
                             <tr>
                                 <th>Date</th>
                                 <td>{{this.testDate}}</td>
                             </tr>
                             <tr>
-                                <th>Throughput</th>
-                                <td>{{this.throughput}}</td>
+                                <th>Throughput (Received)</th>
+                                <td>{{this.throughputReceived}}</td>
+                            </tr>
+                            <tr>
+                                <th>Throughput (Sent)</th>
+                                <td>{{this.throughputSent}}</td>
                             </tr>
                             <tr>
                                 <th>Jitter</th>

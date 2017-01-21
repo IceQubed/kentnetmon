@@ -5,20 +5,23 @@ function generateChartTCP(container, agentId) {
 
     request.addEventListener('readystatechange', function () {
         if (this.readyState == 4) {
-            var results = JSON.parse(this.responseText).results,
+            var throughputReceived = JSON.parse(this.responseText).throughputReceived,
+                throughputSent = JSON.parse(this.responseText).throughputSent,
                 chart,
-                length = results.length;
+                length = throughputReceived.length;
 
             for (var i = 0; i < length; i++) {
-                results[i] /= 1000000;
+                throughputReceived[i] /= 1000000;
+                throughputSent[i] /= 1000000;
             }
 
-            results.unshift('Throughput (Mbps)');
+            throughputReceived.unshift('Throughput Received (Mbps)');
+            throughputSent.unshift('Throughput Sent (Mbps)');
 
             chart = c3.generate({
                 bindto: container,
                 data: {
-                    columns: [results]
+                    columns: [throughputReceived, throughputSent]
                 },
                 axis: {
                     x: {

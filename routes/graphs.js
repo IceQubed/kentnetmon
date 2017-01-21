@@ -9,12 +9,16 @@ router.get('/:agentid', function (req, res) {
         .findById(req.params.agentid)
         .populate('results')
         .exec(function (err, agent) {
-            var results = agent.results.map(function (result) {
+            var throughputSent = agent.results.map(function (result) {
                 return result.end.sum_sent.bits_per_second;
+            });
+            var throughputReceived = agent.results.map(function (result) {
+                return result.end.sum_received.bits_per_second;
             });
 
             res.status(200).json({
-                results: results
+                throughputSent: throughputSent,
+                throughputReceived: throughputReceived
             });
         });
 });
