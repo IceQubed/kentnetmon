@@ -67,14 +67,37 @@
                                 <th>Network Address</th>
                                 <td>{{this.ipAddr}}</td>
                             </tr>
+                            <!--                            <tr></tr>-->
+
                             <tr>
-                                <th>uashdaus</th>
+                                <th>
+                                    <h2><br>Latest Test</h2>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{{this.testDate}}</td>
+                            </tr>
+                            <tr>
+                                <th>Throughput</th>
+                                <td>{{this.throughput}}</td>
+                            </tr>
+                            <tr>
+                                <th>Jitter</th>
                                 <td>{{this.jitter}}</td>
+                            </tr>
+                            <tr>
+                                <th>Packet Loss</th>
+                                <td>{{this.packetLoss}}</td>
+                            </tr>
+                            <tr>
+                                <th>Latency</th>
+                                <td>{{this.latency}}</td>
                             </tr>
                         </table>
 
                         <nav>
-                            <h2>Controls</h2>
+                            <h2><br>Controls</h2>
                             <button data-action="run-tests">Run Both Tests (TCP & UDP)</button>
                             <button data-action="run-test-tcp">Run Throughput Test (TCP)</button>
                             <button data-action="run-test-udp">Run Jitter & Packet Loss Test (UDP)</button>

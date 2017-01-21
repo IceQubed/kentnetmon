@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Agent = mongoose.model('agents');
 var Result = mongoose.model('results');
+var moment = require('moment');
 
 /* GET form. */
 router.get('/', function (req, res) {
@@ -12,14 +13,14 @@ router.get('/', function (req, res) {
                 lastUdpResult = agent.resultsudp.length > 0 ? agent.resultsudp[agent.resultsudp.length - 1] : null;
 
             if (lastTcpResult) {
-                agent.testDate = lastTcpResult.start.timestamp.time;
-                agent.throughput = lastTcpResult.end.sum_received.bits_per_second;
+                agent.testDate = moment(lastTcpResult.start.timestamp.time).format("Do MMM, HH:mm:ss"); //format ISODate nicely using moment.js
+                agent.throughput = parseFloat(lastTcpResult.end.sum_received.bits_per_second / 1000000).toFixed(2) + " Mbps";
             }
 
             if (lastUdpResult) {
-                agent.jitter = lastUdpResult.end.sum.jitter_ms;
-                agent.packetLoss = lastUdpResult.end.sum.lost_percent;
-                agent.latency = 1;
+                agent.jitter = parseFloat(lastUdpResult.end.sum.jitter_ms).toFixed(2) + " %";
+                agent.packetLoss = parseFloat(lastUdpResult.end.sum.lost_percent).toFixed(2) + " %";
+                agent.latency = "Not yet implemented";
             }
         });
 
