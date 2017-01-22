@@ -7,21 +7,20 @@ function generateChartUDP(container, agentId) {
         if (this.readyState == 4) {
             var jitter = JSON.parse(this.responseText).jitter,
                 lostpackets = JSON.parse(this.responseText).lostpackets,
+                date = JSON.parse(this.responseText).date,
                 chart;
 
             jitter.unshift('Jitter (%)');
             lostpackets.unshift('Packet loss (%)');
-
+            date.unshift('Dates');
 
 
             chart = c3.generate({
                 bindto: container,
                 data: {
-                    //                    columns: [jitter]
-                    columns: [
-                        jitter,
-                        lostpackets
-                    ],
+                    x: 'Dates',
+                    xFormat: '%Y %m %d %H %M',
+                    columns: [date, jitter, lostpackets],
                     axes: {
                         [jitter[0]]: 'y',
                         [lostpackets[0]]: 'y2'
@@ -29,7 +28,14 @@ function generateChartUDP(container, agentId) {
                 },
                 axis: {
                     x: {
-                        label: 'Test No.'
+                        //                        label: 'Test No.'
+                        type: 'timeseries',
+                        tick: {
+                            format: '%d/%m',
+                            //                            fit: false,
+                            count: 5,
+                            //                            centered: true
+                        }
                     },
                     y: {
                         label: {
@@ -48,6 +54,19 @@ function generateChartUDP(container, agentId) {
                         },
                         tick: {
                             format: d3.format('.2f')
+                        }
+                    }
+                },
+                tooltip: {
+                    format: {
+                        title: function (d) {
+                            return d;
+                        },
+                    },
+                    position: function (data, width, height, element) {
+                        return {
+                            top: -100,
+                            left: 70
                         }
                     }
                 }

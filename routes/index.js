@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
                 lastUdpResult = agent.resultsudp.length > 0 ? agent.resultsudp[agent.resultsudp.length - 1] : null;
 
             if (lastTcpResult) {
-                agent.testDate = moment(lastTcpResult.start.timestamp.time).format("Do MMM, HH:mm:ss"); //format ISODate nicely using moment.js
+                agent.testDate = moment(lastTcpResult.start.timestamp.time).format("HH:mm:ss, Do MMM YY"); //format ISODate nicely using moment.js
                 agent.throughputSent = parseFloat(lastTcpResult.end.sum_sent.bits_per_second / 1000000).toFixed(2) + " Mbps";
                 agent.throughputReceived = parseFloat(lastTcpResult.end.sum_received.bits_per_second / 1000000).toFixed(2) + " Mbps";
 
