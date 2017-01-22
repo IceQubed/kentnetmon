@@ -62,6 +62,9 @@ function generateChartUDP(container, agentId) {
                         title: function (d) {
                             return d;
                         },
+                        value: function (value, ratio, id) {
+                            return parseFloat(value).toFixed(4) + " %"
+                        }
                     },
                     position: function (data, width, height, element) {
                         return {

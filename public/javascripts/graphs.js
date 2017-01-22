@@ -20,8 +20,8 @@ function generateChartTCP(container, agentId) {
                 //                date[i] = moment(date[i]).format("YYYY MM DD hh ss");
             }
 
-            throughputReceived.unshift('Throughput Received (Mbps)');
-            throughputSent.unshift('Throughput Sent (Mbps)');
+            throughputReceived.unshift('Throughput Received');
+            throughputSent.unshift('Throughput Sent');
             date.unshift('Dates');
 
             chart = c3.generate({
@@ -58,6 +58,9 @@ function generateChartTCP(container, agentId) {
                         title: function (d) {
                             return d;
                         },
+                        value: function (value, ratio, id) {
+                            return parseFloat(value).toFixed(4) + " Mbps"
+                        }
                     },
                     position: function (data, width, height, element) {
                         return {
