@@ -1,13 +1,17 @@
-var express = require('express');
-var router = express.Router();
 var child_process = require('child_process');
 var mongoose = require('mongoose');
 var Result = mongoose.model('results');
-//var Comment = mongoose.model('comments');
 var Agent = mongoose.model('agents');
 
-router.get('/:agentid', function (req, res) {
-    Agent.findById(req.params.agentid, function (err, agent) {
+module.exports = function (agentID, statusCallback) {
+    statusCallback = statusCallback || function () {};
+
+    Agent.findById(agentID, function (err, agent) {
+        if (err) {
+            statusCallback(err);
+            return;
+        }
+
         child_process.execFile('iperf3', ['-c', agent.ipAddr, '-J'], function (error, stdout, stderr) { //execute iperf3 with arguments, takes ip as parameter
             var newResult = new Result();
 
@@ -19,34 +23,28 @@ router.get('/:agentid', function (req, res) {
 
                 Result(newResult).save(function (err, result) {
                     if (err) {
-                        res.status(500).json({
-                            error: err.message
-                        });
-                        throw err;
+                        statusCallback(err);
+                        return;
                     }
 
                     agent.results.push(result.id);
 
                     agent.save(function (err) {
                         if (err) {
-                            res.status(500).json({
-                                error: err.message
-                            });
-                            throw err;
+                            statusCallback(err);
+                            return;
                         }
 
-                        res.status(200).json({
-                            ok: true
-                        });
                         console.log('Item added!'); //when added log in console
+                        statusCallback();
                     });
                 });
             } catch (err) {
-                console.log('BAD IPERF TEST!')
-            }
+                statusCallback(err);
+                console.log('BAD IPERF TEST!');
 
+                return;
+            }
         });
     });
-});
-
-module.exports = router;
+};

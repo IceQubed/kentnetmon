@@ -1,9 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//var Comment = new Schema({
-//    title: String
-//});
+var Job = new Schema({
+    schedule: String,
+    type: String,
+    agentID: {
+        type: Schema.Types.ObjectId,
+        ref: 'agents'
+    }
+});
 
 var Agent = new Schema({
     ipAddr: String,
@@ -16,6 +21,10 @@ var Agent = new Schema({
     resultsudp: [{
         type: Schema.Types.ObjectId,
         ref: 'resultsudp'
+    }],
+    jobs: [{
+        type: Schema.Types.ObjectId,
+        ref: 'jobs'
     }]
 });
 
@@ -208,7 +217,8 @@ var ResultUDP = new Schema({
 
 mongoose.model('agents', Agent);
 mongoose.model('results', Result);
-mongoose.model('resultsudp', ResultUDP)
+mongoose.model('resultsudp', ResultUDP);
+mongoose.model('jobs', Job);
 
 
 mongoose.connect('mongodb://localhost/kentnetmon');

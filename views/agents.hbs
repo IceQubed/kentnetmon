@@ -47,7 +47,7 @@
         <div class="agents">
             {{#each agents}}
             <div class="agent" data-id="{{this.id}}">
-                <h1>{{this.name}} <span data-purpose="status"></span></h1>
+                <h1><a href=/schedule/{{this.id}}>{{this.name}}</a> <span data-purpose="status"></span></h1>
 
                 <div>
                     <div class="statsandcontrols">

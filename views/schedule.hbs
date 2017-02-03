@@ -1,0 +1,47 @@
+<head>
+
+</head>
+
+<body>
+
+    <header>
+        <h2>{{title}}</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/addagent">Add Agent</a></li>
+            <li><a href="/settings">Settings</a></li>
+            <li><a href="#">Log out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-container">
+        <div class="agents">
+            <div class="agent">
+                <h2>{{agent.name}} - Schedule</h2>
+                <h3>Current Schedule:</h3>
+                {{#each schedules}}
+                <li>Schedule: {{this.schedule}}, Type: {{this.type}}</li>
+                {{/each}}
+                <br>
+
+                <h3>Add Schedule:</h3>
+                <form method="post" action="/schedule">
+                    <input type="hidden" name="agentid" value="{{agent.id}}">
+                    <label for="schedule">Schedule:</label>
+                    <input type="text" name="schedule" value="5 * * * *"> <br>
+                    <label for="type">Test type:</label>
+                    <select name="type">
+                        <option value="tcp">TCP</option>
+                        <option value="udp">UDP</option>
+                        <option value="tcpudp">Run Both</option>
+                    </select>
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer ">© Ben Adamson</footer>
+</body>

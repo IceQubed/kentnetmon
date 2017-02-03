@@ -38,6 +38,10 @@ th {
     float: left;
 }
 
+a {
+    color: #434343;
+}
+
 body>nav {
     float: left;
     position: relative;

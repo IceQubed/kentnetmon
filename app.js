@@ -7,18 +7,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 //var agents = require('./routes/agents');
 var settings = require('./routes/settings');
-var iperf = require('./controllers/iperf');
-var iperfudp = require('./controllers/iperfudp');
+var iperf = require('./routes/iperf');
+var iperfudp = require('./routes/iperfudp');
 var graphs = require('./routes/graphs');
 var graphsudp = require('./routes/graphsUDP');
 var addagent = require('./routes/addagent');
 var deleteagent = require('./routes/deleteagent');
-
+var loadJobs = require('./controllers/jobs.js');
+var schedule = require('./routes/schedule.js');
 
 var app = express();
 
@@ -47,6 +49,16 @@ app.use('/iperfudp', iperfudp);
 app.use('/graphs', graphs);
 app.use('/graphsUDP', graphsudp);
 app.use('/deleteagent', deleteagent);
+app.use('/schedule', schedule);
+
+var jobs = mongoose.model('jobs');
+jobs.find({}, function (err, dbData) {
+    if (!err) {
+        loadJobs(dbData);
+    } else {
+        throw err;
+    }
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

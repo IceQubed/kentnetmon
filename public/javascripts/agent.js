@@ -1,5 +1,3 @@
-'use strict';
-
 var Agent = function (container) {
     var self = this;
 
@@ -102,12 +100,15 @@ Agent.prototype.runTcpTest = function (callback) {
     callback = callback || function () {};
 
     request.addEventListener('readystatechange', function () {
-        if (request.readyState === 4) {
-            // Report status
-            console.log('Fuck yeah');
+        if (request.readyState !== 4) { //when complete continue
+            return;
+        }
 
+        if (request.status === 200) {
             self.setStatus(false);
             callback();
+        } else {
+            self.setStatus(true, request.responseText);
         }
     });
     request.open('GET', '/iperf/' + self.id, true);
@@ -122,9 +123,6 @@ Agent.prototype.runUdpTest = function (callback) {
 
     request.addEventListener('readystatechange', function () {
         if (request.readyState === 4) {
-            // Report status
-            console.log('Fuck yeah');
-
             self.setStatus(false);
             callback();
         }
@@ -140,15 +138,12 @@ Agent.prototype.deleteSelf = function (callback) {
 
     callback = callback || function () {};
 
-    if (!confirm('Are you sure you want to delete this agent? \nAgents cannot be undeleted and will have to be re-added!')) {
+    if (!window.confirm('Are you sure you want to delete this agent? \nAgents cannot be undeleted and will have to be re-added!')) {
         return;
     }
 
     request.addEventListener('readystatechange', function () {
         if (request.readyState === 4) {
-            // Report status
-            console.log('Fuck yeah');
-
             self.setStatus(false);
             callback();
         }
