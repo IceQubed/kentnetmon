@@ -17,7 +17,7 @@ router.get('/:agentid', function (req, res) {
                 return result.end.sum_received.bits_per_second;
             });
             var date = agent.results.map(function (result) {
-                return moment(result.start.timestamp.time).format("YYYY MM DD hh mm");
+                return moment(result.start.timestamp.time).format("YYYY MM DD HH mm");
                 //                return moment(result.start.timestamp.time).format("YYYY MM DD");
                 //                result.start.timestamp.time;
             });

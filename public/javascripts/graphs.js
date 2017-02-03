@@ -1,7 +1,3 @@
-'use strict';
-
-
-
 function generateChartTCP(container, agentId) {
     var request = new XMLHttpRequest();
 
@@ -50,7 +46,25 @@ function generateChartTCP(container, agentId) {
                         },
                         tick: {
                             format: d3.format('.2f')
+                        },
+                        min: 0,
+                        padding: {
+                            bottom: 0
                         }
+                    }
+                },
+                grid: {
+                    y: {
+                        lines: [
+                            {
+                                value: 5,
+                                text: 'HD Video Streaming'
+                            },
+                            {
+                                value: 50,
+                                text: 'Target'
+                            }
+                        ]
                     }
                 },
                 tooltip: {
@@ -59,14 +73,14 @@ function generateChartTCP(container, agentId) {
                             return d;
                         },
                         value: function (value, ratio, id) {
-                            return parseFloat(value).toFixed(4) + " Mbps"
+                            return parseFloat(value).toFixed(4) + " Mbps";
                         }
                     },
                     position: function (data, width, height, element) {
                         return {
                             top: -100,
                             left: 70
-                        }
+                        };
                     }
                 }
             });

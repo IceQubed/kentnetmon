@@ -1,5 +1,3 @@
-'use strict';
-
 function generateChartUDP(container, agentId) {
     var request = new XMLHttpRequest();
 
@@ -44,6 +42,10 @@ function generateChartUDP(container, agentId) {
                         },
                         tick: {
                             format: d3.format('.2f')
+                        },
+                        min: 0,
+                        padding: {
+                            bottom: 0
                         }
                     },
                     y2: {
@@ -54,6 +56,10 @@ function generateChartUDP(container, agentId) {
                         },
                         tick: {
                             format: d3.format('.2f')
+                        },
+                        min: 0,
+                        padding: {
+                            bottom: 0
                         }
                     }
                 },
@@ -63,14 +69,14 @@ function generateChartUDP(container, agentId) {
                             return d;
                         },
                         value: function (value, ratio, id) {
-                            return parseFloat(value).toFixed(4) + " %"
+                            return parseFloat(value).toFixed(4) + " %";
                         }
                     },
                     position: function (data, width, height, element) {
                         return {
                             top: -100,
                             left: 70
-                        }
+                        };
                     }
                 }
             });

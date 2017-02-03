@@ -17,7 +17,7 @@ router.get('/:agentid', function (req, res) {
                 return jitter.end.sum.jitter_ms;
             });
             var date = agent.resultsudp.map(function (dateTime) {
-                return moment(dateTime.start.timestamp.time).format("YYYY MM DD hh mm");
+                return moment(dateTime.start.timestamp.time).format("YYYY MM DD HH mm");
             });
 
             res.status(200).json({
