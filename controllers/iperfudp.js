@@ -15,11 +15,11 @@ module.exports = function (agentID, statusCallback) {
         child_process.execFile('iperf3', ['-c', agent.ipAddr, '-u', '-w 4M', '-J'], function (error, stdout, stderr) { //execute iperf3 with arguments, takes ip as parameter
             var newResultUDP = new ResultUDP();
 
-            console.log(stdout);
+            //console.log(stdout);
             try {
                 newResultUDP = JSON.parse(stdout); //parse text output to JSON format
-                console.log('\n \n \n \n \n \n');
-                console.log(newResultUDP); //log results
+                //                console.log('\n \n \n \n \n \n');
+                //                console.log(newResultUDP); //log results
 
                 ResultUDP(newResultUDP).save(function (err, resultudp) {
                     if (err) {
@@ -35,7 +35,7 @@ module.exports = function (agentID, statusCallback) {
                             return;
                         }
 
-                        console.log('Item added!'); //when added log in console
+                        //                        console.log('Item added!'); //when added log in console
                         statusCallback();
                     });
                 });

@@ -25,7 +25,7 @@
                 <h2>Current Schedule:</h2>
                 {{#each schedules}}
                 <ul>
-                    <li><span><b>Type:</b> {{this.type}}, <b>Next Test:</b> {{this.nextScheduled}} <b>Schedule:</b> {{this.schedule}}</span></li>
+                    <li><span><b>Type:</b> {{this.type}}, <b>Schedule:</b> {{this.schedule}}</span></li>
                 </ul>
 
                 {{/each}} {{{noSchedule}}}
@@ -41,9 +41,9 @@
                         <option value="10">10 minute intervals</option>
                         <option value="30">30 minute intervals</option>
                         <option value="advanced">Advanced Setup</option>
-                    </select> <br>
+                    </select>
 
-                    <label for="schedule">Schedule:</label>
+                    <label for="schedule" id="scheduleLabel">Schedule:</label>
                     <input type="text" name="schedule" id="schedule" value="*/5 * * * *"> <br>
 
                     <label for="type">Test type:</label>
@@ -71,14 +71,23 @@
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("schedule").readOnly = true;
+            document.getElementById("schedule").style.visibility = 'hidden';
+            document.getElementById("scheduleLabel").style.visibility = 'hidden';
         });
 
         document.getElementById('schedule_type').onchange = function() {
-            document.getElementById("schedule").readOnly = this.value != 'advanced';
+            if (this.value == 'advanced') {
+                document.getElementById("schedule").readOnly = false;
+                document.getElementById("schedule").style.visibility = 'visible';
+                document.getElementById("scheduleLabel").style.visibility = 'visible';
+            } else {
+                document.getElementById("schedule").style.visibility = 'hidden';
+                document.getElementById("scheduleLabel").style.visibility = 'hidden';
+            }
 
-            if (document.getElementById('schedule_type').value == '5') document.getElementById("schedule").value = '*/5 * * * *';
-            else if (document.getElementById('schedule_type').value == '10') document.getElementById("schedule").value = '*/10 * * * *';
-            else if (document.getElementById('schedule_type').value == '30') document.getElementById("schedule").value = '*/30 * * * *';
+            if (this.value == '5') document.getElementById("schedule").value = '*/5 * * * *';
+            else if (this.value == '10') document.getElementById("schedule").value = '*/10 * * * *';
+            else if (this.value == '30') document.getElementById("schedule").value = '*/30 * * * *';
         };
 
     </script>

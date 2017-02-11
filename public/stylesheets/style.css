@@ -145,10 +145,14 @@ p {
     margin-top: 0.5em;
 }
 
-input#schedule {
+input#editSchedule {
     display: block;
     width: 100%;
     margin-bottom: 0.5em;
+}
+
+input#schedule {
+    width: 130px;
 }
 
 .graphcontainer {

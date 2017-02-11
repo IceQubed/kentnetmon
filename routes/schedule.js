@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Agent = mongoose.model('agents');
 var Job = mongoose.model('jobs');
 var prettyCron = require('prettycron');
+var parser = require('cron-parser');
+var isEmpty = require('lodash.isempty');
 var loadJobs = require('../controllers/jobs.js');
 
 /* GET form. */
@@ -16,7 +18,6 @@ router.get('/:agentid', function (req, res) {
         for (var i = 0; i < schedules.length; i++) {
             schedules[i].schedule = prettyCron.toString(schedules[i].schedule);
             schedules[i].type = schedules[i].type.toUpperCase();
-            schedules[i].nextScheduled = prettyCron.getNext(schedules[i].schedule);
             if (schedules[i].type == 'TCPUDP') schedules[i].type = 'Both Tests';
         }
 
@@ -37,45 +38,55 @@ router.get('/:agentid', function (req, res) {
 
 /* POST form. */
 router.post('/', function (req, res) {
-    var newJob = new Job(); //set up new job using input data
+    var newJob = new Job();
+    //set up new job using input data
     newJob.schedule = req.body.schedule;
     newJob.type = req.body.type;
     newJob.agentID = req.body.agentid;
 
-    console.log(req.body);
+    try {
+        var validCron = parser.parseString(req.body.schedule);
+        if (isEmpty(validCron.errors)) {
+            Job(newJob).save(function (err, job) { //save new job to database
+                Agent.findById(req.body.agentid, function (err, agent) { //link job into relevant agent in database
 
-    Job(newJob).save(function (err, job) { //save new job to database
-        Agent.findById(req.body.agentid, function (err, agent) { //link job into relevant agent in database
-
-            if (err) {
-                res.status(500).json({
-                    error: err.message
-                });
-                throw err;
-            }
-
-            agent.jobs.push(job.id);
-            agent.save(function (err) {
-                if (err) {
-                    res.status(500).json({
-                        error: err.message
-                    });
-                    throw err;
-                }
-
-                console.log('Job added!'); //when added, log in console
-                res.redirect('/');
-
-                Job.find({}, function (err, dbData) {
-                    if (!err) {
-                        loadJobs(dbData);
-                    } else {
+                    if (err) {
+                        res.status(500).json({
+                            error: err.message
+                        });
                         throw err;
                     }
+
+                    agent.jobs.push(job.id);
+                    agent.save(function (err) {
+                        if (err) {
+                            res.status(500).json({
+                                error: err.message
+                            });
+                            throw err;
+                        }
+
+                        console.log('Job added!'); //when added, log in console
+
+                        res.redirect(/schedule/ + req.body.agentid);
+
+                        Job.find({}, function (err, dbData) {
+                            if (!err) {
+                                loadJobs(dbData);
+                            } else {
+                                throw err;
+                            }
+                        });
+                    });
                 });
             });
-        });
-    });
+        } else {
+            console.log('Bad cron syntax, ignoring!');
+            res.redirect('/');
+        }
+    } catch (err) {
+        console.error(err);
+    }
 });
 
 
