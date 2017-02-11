@@ -20,28 +20,66 @@
     <div class="content-container">
         <div class="agents">
             <div class="agent">
-                <h2>{{agent.name}} - Schedule</h2>
-                <h3>Current Schedule:</h3>
+                <h1>{{agent.name}} - Schedule</h1>
+                <br>
+                <h2>Current Schedule:</h2>
                 {{#each schedules}}
-                <li>Schedule: {{this.schedule}}, Type: {{this.type}}</li>
-                {{/each}}
+                <ul>
+                    <li><span><b>Type:</b> {{this.type}}, <b>Next Test:</b> {{this.nextScheduled}} <b>Schedule:</b> {{this.schedule}}</span></li>
+                </ul>
+
+                {{/each}} {{{noSchedule}}}
                 <br>
 
-                <h3>Add Schedule:</h3>
+                <h2>Add Schedule:</h2>
                 <form method="post" action="/schedule">
                     <input type="hidden" name="agentid" value="{{agent.id}}">
+
+                    <label for="schedule_type">Schedule:</label>
+                    <select id="schedule_type">
+                        <option value="5">05 minute intervals</option>
+                        <option value="10">10 minute intervals</option>
+                        <option value="30">30 minute intervals</option>
+                        <option value="advanced">Advanced Setup</option>
+                    </select> <br>
+
                     <label for="schedule">Schedule:</label>
-                    <input type="text" name="schedule" value="5 * * * *"> <br>
+                    <input type="text" name="schedule" id="schedule" value="*/5 * * * *"> <br>
+
                     <label for="type">Test type:</label>
                     <select name="type">
+                        <option value="tcpudp">Run Both</option>
                         <option value="tcp">TCP</option>
                         <option value="udp">UDP</option>
-                        <option value="tcpudp">Run Both</option>
                     </select>
+
                     <input type="submit" value="Save">
                 </form>
+                <br><br>
+                <h2>Scheduling Information:</h2>
+                Scheduling uses a cron-style format. For more information please <a href=https://www.npmjs.com/package/node-schedule#cron-style-scheduling>read the plugin documentation</a>.<br>
+                <h3>Format:</h3><br>
+                <p>
+                    * * * * * * <br> ┬ ┬ ┬ ┬ ┬ ┬ <br> │ │ │ │ │ | <br> │ │ │ │ │ └ day of week (0 - 7) (0 or 7 is Sun) <br> │ │ │ │ └───── month (1 - 12) <br> │ │ │ └────────── day of month (1 - 31) <br> │ │ └─────────────── hour (0 - 23) <br> │ └──────────────────── minute (0 - 59) <br> └───────────────────────── second (0 - 59, OPTIONAL)
+                </p>
+                <br> For example, to run a test every five minutes use "*/5 * * * *"
             </div>
         </div>
     </div>
     <footer class="footer ">© Ben Adamson</footer>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("schedule").readOnly = true;
+        });
+
+        document.getElementById('schedule_type').onchange = function() {
+            document.getElementById("schedule").readOnly = this.value != 'advanced';
+
+            if (document.getElementById('schedule_type').value == '5') document.getElementById("schedule").value = '*/5 * * * *';
+            else if (document.getElementById('schedule_type').value == '10') document.getElementById("schedule").value = '*/10 * * * *';
+            else if (document.getElementById('schedule_type').value == '30') document.getElementById("schedule").value = '*/30 * * * *';
+        };
+
+    </script>
 </body>

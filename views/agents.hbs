@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
+    <!--
     <script>
         function startTimer(duration, display) {
             var timer = duration,
@@ -26,6 +27,7 @@
         }
 
     </script>
+-->
 </head>
 
 <body>
@@ -47,7 +49,7 @@
         <div class="agents">
             {{#each agents}}
             <div class="agent" data-id="{{this.id}}">
-                <h1><a href=/schedule/{{this.id}}>{{this.name}}</a> <span data-purpose="status"></span></h1>
+                <h1>{{this.name}} <span data-purpose="status"></span></h1>
 
                 <div>
                     <div class="statsandcontrols">
@@ -101,6 +103,11 @@
 
                         <nav>
                             <h2><br>Controls</h2>
+                            <div class="schedulebutton">
+                                <form action=/schedule/{{this.id}}>
+                                    <input id="schedule" type="submit" value="Edit Schedule" />
+                                </form>
+                            </div>
                             <button data-action="run-tests">Run Both Tests (TCP & UDP)</button>
                             <button data-action="run-test-tcp">Run Throughput Test (TCP)</button>
                             <button data-action="run-test-udp">Run Jitter & Packet Loss Test (UDP)</button>

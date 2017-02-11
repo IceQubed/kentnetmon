@@ -11,16 +11,25 @@ router.get('/:agentid', function (req, res) {
     Agent.findById(req.params.agentid).populate('jobs').exec(function (err, agent) {
 
         var schedules = agent.jobs;
+        var noSchedule = "";
 
-        //        schedules.schedule.forEach(function () {
-        //            this.schedule = prettyCron.toString(this.schedule);
-        //        });
+        for (var i = 0; i < schedules.length; i++) {
+            schedules[i].schedule = prettyCron.toString(schedules[i].schedule);
+            schedules[i].type = schedules[i].type.toUpperCase();
+            schedules[i].nextScheduled = prettyCron.getNext(schedules[i].schedule);
+            if (schedules[i].type == 'TCPUDP') schedules[i].type = 'Both Tests';
+        }
+
+        if (schedules.length < 1) {
+            noSchedule = "<br><b>This agent has no scheduled tests!<br></b>";
+        }
 
         res.render(
             'schedule', {
                 title: 'KentNetMon - Agent Schedule',
                 agent: agent,
-                schedules: schedules
+                schedules: schedules,
+                noSchedule: noSchedule
             }
         );
     });
@@ -32,6 +41,8 @@ router.post('/', function (req, res) {
     newJob.schedule = req.body.schedule;
     newJob.type = req.body.type;
     newJob.agentID = req.body.agentid;
+
+    console.log(req.body);
 
     Job(newJob).save(function (err, job) { //save new job to database
         Agent.findById(req.body.agentid, function (err, agent) { //link job into relevant agent in database

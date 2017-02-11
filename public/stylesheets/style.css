@@ -25,6 +25,10 @@ footer {
     border-radius: 5px;
 }
 
+h1 {
+    margin: 10px 0 10px 0;
+}
+
 h2 {
     margin: 0;
 }
@@ -70,11 +74,37 @@ label {
     line-height: 2em;
 }
 
-.agents {}
+p {
+    font-family: "Courier New", Courier, monospace;
+    border: 1px solid #434343;
+    margin-top: -5px;
+    padding: 2px;
+    display: inline-block;
+    line-height: 1em;
+}
+
+.agent>ul {
+    margin: 0px;
+}
+
+.agent>ul>li {
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+.agent>ul>li>span {
+    position: relative;
+    left: -25 px;
+    font-size: 14px;
+}
+
+.agents {
+    background-color: ghostwhite;
+}
 
 .agent {
     padding: 3px;
-    margin: 5px 0px 5px 0px;
+    margin: 10px 0px 5px 0px;
     border: 5px solid #434343;
     border-radius: 5px;
     line-height: 1.4em;
@@ -113,6 +143,12 @@ label {
 
 .statsandcontrols nav button+button {
     margin-top: 0.5em;
+}
+
+input#schedule {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5em;
 }
 
 .graphcontainer {
