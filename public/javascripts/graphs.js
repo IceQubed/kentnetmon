@@ -28,6 +28,9 @@ function generateChartTCP(container, agentId) {
                     //                    xFormat: '%Y %m %d',
                     columns: [date, throughputReceived, throughputSent]
                 },
+                subchart: { //subchart for chart zoom interaction
+                    show: true
+                },
                 axis: {
                     x: {
                         //                        label: 'Test No.'

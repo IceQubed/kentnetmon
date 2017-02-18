@@ -24,6 +24,9 @@ function generateChartUDP(container, agentId) {
                         [lostpackets[0]]: 'y2'
                     }
                 },
+                subchart: { //subchart for chart zoom interaction
+                    show: true
+                },
                 axis: {
                     x: {
                         //                        label: 'Test No.'
