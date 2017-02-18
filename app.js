@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var expressListRoutes = require('express-list-routes');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,8 +22,11 @@ var addagent = require('./routes/addagent');
 var deleteagent = require('./routes/deleteagent');
 var loadJobs = require('./controllers/jobs.js');
 var schedule = require('./routes/schedule.js');
+var unschedule = require('./routes/unschedule.js');
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +54,8 @@ app.use('/graphs', graphs);
 app.use('/graphsUDP', graphsudp);
 app.use('/deleteagent', deleteagent);
 app.use('/schedule', schedule);
+app.use('/unschedule', unschedule);
+
 
 var jobs = mongoose.model('jobs');
 jobs.find({}, function (err, dbData) {
@@ -90,5 +96,14 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
+
+
+//console.log(app._router.stack // registered routes
+//    .filter(r => r.route) // take out all the middleware
+//    .map(r => r.route.path) // get all the paths
+//);
+//console.log(expressListRoutes()); // registered routes
+
+
 
 module.exports = app;

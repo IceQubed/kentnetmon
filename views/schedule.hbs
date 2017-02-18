@@ -25,7 +25,14 @@
                 <h2>Current Schedule:</h2>
                 {{#each schedules}}
                 <ul>
-                    <li><span><b>Type:</b> {{this.type}}, <b>Schedule:</b> {{this.schedule}}</span></li>
+                    <li>
+                        <span>
+                            <b>Type:</b> {{this.type}}, <b>Schedule:</b> {{this.schedule}}
+                            <form method="post" action="/unschedule/{{this.id}}">
+                                <input id="unschedule" type="submit" value="Delete Schedule" />
+                            </form>
+                        </span>
+                    </li>
                 </ul>
 
                 {{/each}} {{{noSchedule}}}
