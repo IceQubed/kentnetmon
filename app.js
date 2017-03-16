@@ -1,5 +1,6 @@
 // mongoose config
 require('./database');
+require('./controllers/ping');
 
 var express = require('express');
 var path = require('path');
@@ -9,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var expressListRoutes = require('express-list-routes');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,8 +27,6 @@ var schedule = require('./routes/schedule.js');
 var unschedule = require('./routes/unschedule.js');
 
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -104,6 +104,11 @@ app.use(function (err, req, res, next) {
 //);
 //console.log(expressListRoutes()); // registered routes
 
+//var port = 80;
+//app.listen(port);
 
+var listener = app.listen(3213, function () {
+    console.log('Listening on port ' + listener.address().port); //Listening on port
+});
 
 module.exports = app;

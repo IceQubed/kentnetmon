@@ -25,7 +25,15 @@ var Agent = new Schema({
     jobs: [{
         type: Schema.Types.ObjectId,
         ref: 'jobs'
+    }],
+    ping: [{
+        type: Schema.Types.ObjectId,
+        ref: 'pings'
     }]
+});
+
+var Ping = new Schema({
+    time: Number
 });
 
 var Result = new Schema({
@@ -121,7 +129,7 @@ var Result = new Schema({
             remote_system: Number,
         }
     }
-})
+});
 
 var ResultUDP = new Schema({
     start: {
@@ -212,13 +220,14 @@ var ResultUDP = new Schema({
             remote_system: Number,
         }
     }
-})
+});
 
 
 mongoose.model('agents', Agent);
 mongoose.model('results', Result);
 mongoose.model('resultsudp', ResultUDP);
 mongoose.model('jobs', Job);
+mongoose.model('pings', Ping);
 
 
 mongoose.connect('mongodb://localhost/kentnetmon');

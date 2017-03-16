@@ -2,6 +2,7 @@ const schedule = require('node-schedule');
 
 var iperf = require('./iperf');
 var iperfudp = require('./iperfudp');
+var pingTest = require('./ping');
 
 const jobFunctions = {
     tcp: iperf,
@@ -15,7 +16,8 @@ const jobFunctions = {
 
             iperfudp(agentId, statusCallback);
         });
-    }
+    },
+    ping: pingTest
 };
 
 var scheduledJobs = [];
