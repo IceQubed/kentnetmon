@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
             }
 
             if (lastPingResult) {
-                agent.latency = parseFloat(lastPingResult.time).toFixed(2) + " ms";
+                agent.latency = lastPingResult.time + " ms";
             }
             else{
                 agent.latency = "No ping tests completed";
@@ -52,23 +52,3 @@ router.get('/', function (req, res) {
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-//var express = require('express');
-//var router = express.Router();
-//
-///* GET home page. */
-//router.get('/', function (req, res, next) {
-//    res.render('index', {
-//        title: 'KentNetMon Dashboard'
-//    });
-//});
-//
-//module.exports = router;
