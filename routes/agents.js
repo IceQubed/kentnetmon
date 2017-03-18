@@ -1,3 +1,13 @@
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+//MOVED TO INDEX.JS
+
+
+
 //var express = require('express');
 //var router = express.Router();
 //var mongoose = require('mongoose');
