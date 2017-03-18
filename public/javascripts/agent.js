@@ -1,8 +1,48 @@
+/*
+i)  upload udp to server
+ii) recursive deletion
+
+
+1. Query page for each graph container in the constructor
+ - self.graphUdpContainer = self.container.querySelector('.graphUDP');
+
+2. For both types of graph, create functions that fetch & return data in c3 format using the defined column names
+   use a callback and actually query backend for data - this will be where you'll do date filtering
+   return chart.columns through callback. See runUdpTest
+   columns: >>>>> [date, jitter, lostpackets] <<<<<<,
+   callback([date, jitter, lostpackets]);
+
+3. As part of bind, create two functions (tcp, udp) to actually generate charts - querySelector for chart class
+   use previously created callbacks to populate the necessary data
+   store chart on self - self.tcpChart self.udpChart
+
+4. Create another two functions to update the saved chart with new data from step 2. self.chart.unload(); self.chart.load(STEP2DATA)
+
+5. Create datetime controls in the agent hbs template
+
+6. Bind to these controls in the bind function - querySelector with the change event
+
+7. Handle change event to store the date range on self - self.toDate, self.fromDate
+
+8. Update step 2 function to read saved dates and use them as query parameters - 'toDate=' + date.getTime();
+
+9. Actually implement filtering in graph routes - already skeleton'd for TCP!!
+
+*/
+
+var jitterColumnName = 'Jitter (%)';
+var packetLossColumnName = 'Packet loss (%)';
+var dateColumnName = 'Dates';
+var throughputReceivedColumnName = 'Throughput Received';
+var throughputSentColumnName = 'Throughput Sent';
+
 var Agent = function (container) {
     var self = this;
 
     self.container = container;
     self.id = self.container.getAttribute('data-id');
+
+
 
     self.bind();
 };

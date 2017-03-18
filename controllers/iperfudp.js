@@ -12,7 +12,7 @@ module.exports = function (agentID, statusCallback) {
             return;
         }
 
-        child_process.execFile('iperf3', ['-c', agent.ipAddr, '-u', '-w 4M', '-J'], function (error, stdout, stderr) { //execute iperf3 with arguments, takes ip as parameter
+        child_process.execFile('iperf3', ['-c', agent.ipAddr, '-u', '-J'], function (error, stdout, stderr) { //execute iperf3 with arguments, takes ip as parameter
             var newResultUDP = new ResultUDP();
 
             //console.log(stdout);
