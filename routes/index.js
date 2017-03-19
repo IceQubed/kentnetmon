@@ -44,7 +44,7 @@ router.get('/', function (req, res) {
 
         res.render(
             'agents', {
-                title: 'KentNetMon Agents',
+                title: 'KentNetMon - Dashboard',
                 agents: agents
             }
         );

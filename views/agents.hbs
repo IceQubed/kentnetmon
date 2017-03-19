@@ -34,14 +34,19 @@
 
     <header>
         <h2>{{title}}</h2>
+<!--        <h2><a href="/addagent">Add Agent</a></h2>-->
     </header>
 
     <nav>
         <ul>
+            <li><a href="/"><img border=0px alt="Dashboard" src="../images/graph.svg">Dashboard</a></li><br><br>
+            <li><a href="/addagent"><img border=0px alt="Add Agent" src="../images/add.svg">Add Agent</a></li>
+<!--
             <li><a href="/">Dashboard</a></li>
             <li><a href="/addagent">Add Agent</a></li>
             <li><a href="/settings">Settings</a></li>
             <li><a href="#">Log out</a></li>
+-->
         </ul>
     </nav>
 
@@ -117,10 +122,40 @@
 
                     <div class="graphcontainer">
                         <div class="graphTCP" data-agent-tcp-id="{{this.id}}"></div>
+                        <form>
+                            <center>
+                                <br><br>
+                                <table>
+                                    <tr>
+                                        <th>View graph from:</th>
+                                        <td><input type="date" name="fromDateTCP"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>View graph to:</th>
+                                        <td><input type="date" name="toDateTCP"></td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </form>
                     </div>
 
                     <div class="graphcontainer">
                         <div class="graphUDP" data-agent-udp-id="{{this.id}}"></div>
+                        <form>
+                            <center>
+                                <br><br>
+                                <table>
+                                    <tr>
+                                        <th>View graph from:</th>
+                                        <td><input type="date" name="fromDateUDP"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>View graph to:</th>
+                                        <td><input type="date" name="toDateUDP"></td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </form>
                     </div>
                 </div>
             </div>

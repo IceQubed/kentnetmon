@@ -43,6 +43,7 @@ th {
 }
 
 a {
+/*    color: azure;*/
     color: #434343;
 }
 
@@ -52,6 +53,7 @@ body>nav {
     width: 100px;
     height: 100%;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding: 0em;
     background: #434343;
     border-radius: 5px;

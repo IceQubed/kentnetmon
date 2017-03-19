@@ -18,7 +18,7 @@ ii) recursive deletion
 
 4. Create another two functions to update the saved chart with new data from step 2. self.chart.unload(); self.chart.load(STEP2DATA)
 
-5. Create datetime controls in the agent hbs template
+5. DONE-----------Create datetime controls in the agent hbs template
 
 6. Bind to these controls in the bind function - querySelector with the change event
 
@@ -71,7 +71,40 @@ Agent.prototype.bind = function () {
     });
 
     self.statusContainer = self.container.querySelector('[data-purpose=status]');
+//
+//    self.graphTcpContainer = self.container.querySelector('[class~=graphTCP]');
+//    self.graphTcpContainer.addEventListener('change', function () {
+//        self.getTcpData();
+//    });
+//
+//    self.graphUdpContainer = self.container.querySelector('[class~=graphUDP]');
+//    self.graphUdpContainer.addEventListener('change', function () {
+//        self.getUdpData();
+//    });
 };
+
+
+//GRAPHING-------------------------------------------------
+
+
+//Agent.prototype.TcpChanged = function(){
+//    var self = this,
+//        request = new XMLHttpRequest();
+//
+//    self.getTcpData()
+//};
+//
+//Agent.prototype.getTcpData = function(callback){
+//
+//
+//
+//};
+
+
+
+
+//---------------------------------------------------------
+
 
 
 Agent.prototype.onRunTestsClick = function () {
@@ -137,14 +170,14 @@ Agent.prototype.runTcpTest = function (callback) {
     var self = this,
         request = new XMLHttpRequest();
 
-    callback = callback || function () {};
+    callback = callback || function () {}; //ensure that 'callback' is a function
 
     request.addEventListener('readystatechange', function () {
-        if (request.readyState !== 4) { //when complete continue
+        if (request.readyState !== 4) { //don't run next lines unless request complete
             return;
         }
 
-        if (request.status === 200) {
+        if (request.status === 200) { //if status is 'OK'
             self.setStatus(false);
             callback();
         } else {

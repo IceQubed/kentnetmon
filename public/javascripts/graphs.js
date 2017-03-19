@@ -64,7 +64,7 @@ function generateChartTCP(container, agentId) {
                                 text: 'HD Video Streaming'
                             },
                             {
-                                value: 50,
+                                value: 80,
                                 text: 'Target'
                             }
                         ]
