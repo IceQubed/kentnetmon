@@ -5,48 +5,20 @@
     <!-- Load d3.js and c3.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
-
-    <!--
-    <script>
-        function startTimer(duration, display) {
-            var timer = duration,
-                minutes, seconds;
-            setInterval(function() {
-                minutes = parseInt(timer / 60, 10)
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = minutes + ":" + seconds + " left in test before page refresh";
-
-                if (--timer < 0) {
-                    timer = duration;
-                }
-            }, 1000);
-        }
-
-    </script>
--->
 </head>
 
 <body>
 
     <header>
         <h2>{{title}}</h2>
-<!--        <h2><a href="/addagent">Add Agent</a></h2>-->
     </header>
 
     <nav>
         <ul>
-            <li><a href="/"><img border=0px alt="Dashboard" src="../images/graph.svg">Dashboard</a></li><br><br>
-            <li><a href="/addagent"><img border=0px alt="Add Agent" src="../images/add.svg">Add Agent</a></li>
-<!--
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/addagent">Add Agent</a></li>
-            <li><a href="/settings">Settings</a></li>
-            <li><a href="#">Log out</a></li>
--->
+            <center>
+                <li><a href="/"><img border=0px alt="Dashboard" src="../images/graph.svg">Dashboard</a></li><br><br>
+                <li><a href="/addagent"><img border=0px alt="Add Agent" src="../images/add.svg">Add Agent</a></li>
+            </center>
         </ul>
     </nav>
 

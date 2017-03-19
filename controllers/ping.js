@@ -30,28 +30,32 @@ module.exports = function (agentID, statusCallback) {
             console.log(agent.name + ' responded in ' + ms + 'ms.');
             newPing.time = ms;
 
-            try {
-                PingModel(newPing).save(function (err, ping) {
-                    if (err) {
-                        statusCallback(err);
-                        return;
-                    }
-                    agent.ping.push(ping.id);
-
-                    agent.save(function (err) {
+            if (newPing.time) {
+                try {
+                    PingModel(newPing).save(function (err, ping) {
                         if (err) {
                             statusCallback(err);
                             return;
                         }
-                        statusCallback();
+                        agent.ping.push(ping.id);
+
+                        agent.save(function (err) {
+                            if (err) {
+                                statusCallback(err);
+                                return;
+                            }
+                            statusCallback();
+                        });
                     });
-                });
 
-            } catch (err) {
-                statusCallback(err);
-                console.log('BAD PING TEST!');
+                } catch (err) {
+                    statusCallback(err);
+                    console.log('BAD PING TEST!');
 
-                return;
+                    return;
+                }
+            } else {
+                console.log('BAD PING TEST! AGENT NOT FOUND!');
             }
         });
     });
