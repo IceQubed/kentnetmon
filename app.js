@@ -90,17 +90,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-//console.log(app._router.stack // registered routes
-//    .filter(r => r.route) // take out all the middleware
-//    .map(r => r.route.path) // get all the paths
-//);
-//console.log(expressListRoutes()); // registered routes
-
-//var port = 80;
-//app.listen(port);
-
-var listener = app.listen(3213, function () {
+var listener = app.listen(8080, function () {
     console.log('Listening on port ' + listener.address().port); //Listening on port
 });
 

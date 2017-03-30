@@ -43,20 +43,17 @@ router.post('/', function (req, res) {
     newJob.schedule = req.body.schedule;
     newJob.type = req.body.type;
     newJob.agentID = req.body.agentid;
-
     try {
         var validCron = parser.parseString(req.body.schedule);
         if (isEmpty(validCron.errors)) {
             Job(newJob).save(function (err, job) { //save new job to database
-                Agent.findById(req.body.agentid, function (err, agent) { //link job into relevant agent in database
-
+                Agent.findById(req.body.agentid, function (err, agent) { //link job to agent
                     if (err) {
                         res.status(500).json({
                             error: err.message
                         });
                         throw err;
                     }
-
                     agent.jobs.push(job.id);
                     agent.save(function (err) {
                         if (err) {
@@ -65,11 +62,8 @@ router.post('/', function (req, res) {
                             });
                             throw err;
                         }
-
                         console.log('Job added!'); //when added, log in console
-
                         res.redirect(/schedule/ + req.body.agentid);
-
                         Job.find({}, function (err, dbData) {
                             if (!err) {
                                 loadJobs(dbData);

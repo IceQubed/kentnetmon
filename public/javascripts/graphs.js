@@ -13,7 +13,6 @@ function generateChartTCP(container, agentId) {
             for (var i = 0; i < length; i++) {
                 throughputReceived[i] /= 1000000;
                 throughputSent[i] /= 1000000;
-                //                date[i] = moment(date[i]).format("YYYY MM DD hh ss");
             }
 
             throughputReceived.unshift('Throughput Received');
@@ -25,7 +24,6 @@ function generateChartTCP(container, agentId) {
                 data: {
                     x: 'Dates',
                     xFormat: '%Y %m %d %H %M',
-                    //                    xFormat: '%Y %m %d',
                     columns: [date, throughputReceived, throughputSent]
                 },
                 subchart: { //subchart for chart zoom interaction
@@ -33,13 +31,10 @@ function generateChartTCP(container, agentId) {
                 },
                 axis: {
                     x: {
-                        //                        label: 'Test No.'
                         type: 'timeseries',
                         tick: {
                             format: '%d/%m',
-                            //                            fit: false,
-                            count: 5,
-                            //                            centered: true
+                            count: 5
                         }
                     },
                     y: {

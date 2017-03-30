@@ -8,7 +8,6 @@ var ResultUDP = mongoose.model('resultsudp');
 var Ping = mongoose.model('pings');
 var loadJobs = require('../controllers/jobs.js');
 
-
 router.get('/:agentid', function (req, res) {
     Agent.findById(req.params.agentid, function (err, agent) {
 
@@ -31,7 +30,7 @@ router.get('/:agentid', function (req, res) {
             console.log(" * removed a ping result: " + agent.pings[l]);
         }
 
-        //Refresh job list from database (otherwise removed jobs will remain in memory)
+        //Refresh job list from database (otherwise removed jobs will remain in RAM)
         Job.find({}, function (err, dbData) {
             if (!err) {
                 loadJobs(dbData);

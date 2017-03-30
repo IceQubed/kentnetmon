@@ -5,14 +5,11 @@ var Agent = mongoose.model('agents');
 
 /* GET form. */
 router.get('/', function (req, res) {
-    Agent.find(function (err, agents) {
-        res.render(
-            'addagent', {
-                title: 'KentNetMon - Add Agent',
-                agents: agents
-            }
-        );
-    })
+    res.render(
+        'addagent', {
+            title: 'KentNetMon - Add Agent'
+        }
+    );
 });
 
 /* POST form. */
@@ -26,6 +23,5 @@ router.post('/', function (req, res) {
             res.redirect('/');
         });
 });
-
 
 module.exports = router;
