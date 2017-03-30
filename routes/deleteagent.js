@@ -10,24 +10,25 @@ var loadJobs = require('../controllers/jobs.js');
 
 router.get('/:agentid', function (req, res) {
     Agent.findById(req.params.agentid, function (err, agent) {
+        var i;
 
         console.log("Deleting Agent: " + agent.id + " and all related documents:");
         //Delete all related documents from database
-        for (var i = 0; i < agent.jobs.length; i++) {
+        for (i = 0; i < agent.jobs.length; i++) {
             Job.findByIdAndRemove(agent.jobs[i]).exec();
             console.log(" * removed a job: " + agent.jobs[i]);
         }
-        for (var j = 0; j < agent.results.length; j++) {
-            Result.findByIdAndRemove(agent.results[j]).exec();
-            console.log(" * removed a result: " + agent.results[j]);
+        for (i = 0; i < agent.results.length; i++) {
+            Result.findByIdAndRemove(agent.results[i]).exec();
+            console.log(" * removed a result: " + agent.results[i]);
         }
-        for (var k = 0; k < agent.resultsudp.length; k++) {
-            ResultUDP.findByIdAndRemove(agent.resultsudp[k]).exec();
-            console.log(" * removed a udp result: " + agent.resultsudp[k]);
+        for (i = 0; i < agent.resultsudp.length; i++) {
+            ResultUDP.findByIdAndRemove(agent.resultsudp[i]).exec();
+            console.log(" * removed a udp result: " + agent.resultsudp[i]);
         }
-        for (var l = 0; l < agent.ping.length; l++) {
-            Ping.findByIdAndRemove(agent.pings[l]).exec();
-            console.log(" * removed a ping result: " + agent.pings[l]);
+        for (i = 0; i < agent.ping.length; i++) {
+            Ping.findByIdAndRemove(agent.ping[i]).exec();
+            console.log(" * removed a ping result: " + agent.ping[i]);
         }
 
         //Refresh job list from database (otherwise removed jobs will remain in RAM)
