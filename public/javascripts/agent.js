@@ -371,11 +371,12 @@ Date.prototype.toDateInputValue = (function () {
     return local.toJSON().slice(0, 10);
 });
 
+window.addEventListener('load', function () {
+    var i,
+        agents = [], //blank array to hold all agent objects
+        agentContainers = document.querySelectorAll('.agents > .agent'); //find all agents
 
-var i,
-    agents = [], //blank array to hold all agent objects
-    agentContainers = document.querySelectorAll('.agents > .agent'); //find all agents
-
-for (i = 0; i < agentContainers.length; i += 1) {
-    agents.push(new Agent(agentContainers[i])); //build agent objects from agent list and add to array
-}
+    for (i = 0; i < agentContainers.length; i += 1) {
+        agents.push(new Agent(agentContainers[i])); //build agent objects from agent list and add to array
+    }
+});
