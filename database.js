@@ -229,5 +229,8 @@ mongoose.model('resultsudp', ResultUDP);
 mongoose.model('jobs', Job);
 mongoose.model('pings', Ping);
 
-
-mongoose.connect('mongodb://localhost/kentnetmon');
+if (process.env.NODE_ENV === 'develop') {
+    mongoose.connect('mongodb://localhost/kentnetmon');
+} else {
+    mongoose.connect('mongodb://netperf:Pq8U5IlIijzK@localhost/netperf');
+}
