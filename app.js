@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var expressListRoutes = require('express-list-routes');
 
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var iperf = require('./routes/iperf');
 var iperfudp = require('./routes/iperfudp');
 var graphs = require('./routes/graphs');
@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/addagent', addagent);
 app.use('/iperf', iperf);
 app.use('/iperfudp', iperfudp);
