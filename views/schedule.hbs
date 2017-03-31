@@ -48,9 +48,10 @@
 
                     <label for="schedule_type">Schedule:</label>
                     <select id="schedule_type">
-                        <option value="5">05 minute intervals</option>
                         <option value="10">10 minute intervals</option>
+                        <option value="15">15 minute intervals</option>
                         <option value="30">30 minute intervals</option>
+                        <option value="60">60 minute intervals</option>
                         <option value="advanced">Advanced Setup</option>
                     </select>
 
@@ -97,9 +98,10 @@
                 document.getElementById("scheduleLabel").style.visibility = 'hidden';
             }
 
-            if (this.value == '5') document.getElementById("schedule").value = '*/5 * * * *';
-            else if (this.value == '10') document.getElementById("schedule").value = '*/10 * * * *';
+            if (this.value == '10') document.getElementById("schedule").value = '*/10 * * * *';
+            else if (this.value == '15') document.getElementById("schedule").value = '*/15 * * * *';
             else if (this.value == '30') document.getElementById("schedule").value = '*/30 * * * *';
+            else if (this.value == '60') document.getElementById("schedule").value = '0 * * * *';
         };
 
     </script>

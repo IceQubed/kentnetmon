@@ -36,7 +36,6 @@ router.get('/:agentid', function (req, res) {
         .exec(function (err, agent) {
             if (!agent || !agent.results) {
                 res.status(500);
-
                 return;
             }
 
