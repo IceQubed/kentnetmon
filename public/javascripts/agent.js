@@ -52,8 +52,10 @@ Agent.prototype.bind = function () {
     self.fromDateTcp = self.container.querySelector('input[name$="fromDateTCP"]');
     self.toDateTcp = self.container.querySelector('input[name$="toDateTCP"]');
 
-    self.fromDateTcp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).toDateInputValue();
-    self.toDateTcp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).toDateInputValue();
+    self.fromDateTcp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 12)).toDateInputValue();
+    self.toDateTcp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 12)).toDateInputValue();
+    //    self.fromDateTcp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).toDateInputValue();
+    //    self.toDateTcp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).toDateInputValue();
 
     self.fromDateTcp.addEventListener('change', function () {
         self.getTcpData(self.updateTcpChart, self.fromDateTcp.value, self.toDateTcp.value);
@@ -73,8 +75,10 @@ Agent.prototype.bind = function () {
     self.fromDateUdp = self.container.querySelector('input[name$="fromDateUDP"]');
     self.toDateUdp = self.container.querySelector('input[name$="toDateUDP"]');
 
-    self.fromDateUdp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).toDateInputValue();
-    self.toDateUdp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).toDateInputValue();
+    self.fromDateUdp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 12)).toDateInputValue();
+    self.toDateUdp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 12)).toDateInputValue();
+    //    self.fromDateUdp.value = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).toDateInputValue();
+    //    self.toDateUdp.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).toDateInputValue();
 
     self.fromDateUdp.addEventListener('change', function () {
         self.getUdpData(self.updateUdpChart, self.fromDateUdp.value, self.toDateUdp.value);
@@ -97,15 +101,15 @@ Agent.prototype.getTcpData = function (callback, fromDate, toDate) {
         uri = '/graphs/' + self.id,
         parameters = [];
 
-    callback = callback || function () {};
+    callback = callback || function () {}; //ensure a callback function exists
 
-    if (fromDate) {
+    if (fromDate) { //if 'from' input is used pass this parameter to the route
         parameters.push('fromDate=' + encodeURIComponent(fromDate));
     }
-    if (toDate) {
+    if (toDate) { //if 'to' input is used pass this parameter to the route
         parameters.push('toDate=' + encodeURIComponent(toDate));
     }
-
+    //set up an event listener to run where there is a response from the route
     request.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
             self.setStatus(false);
@@ -117,6 +121,7 @@ Agent.prototype.getTcpData = function (callback, fromDate, toDate) {
             callback.call(self, date, throughputReceived, throughputSent);
         }
     });
+    //send a request to the route for the data
     request.open('GET', uri + '?' + parameters.join('&'), true);
     request.send();
     self.setStatus(true, 'Fetching TCP data');
