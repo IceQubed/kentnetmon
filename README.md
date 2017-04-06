@@ -1,5 +1,5 @@
 # kentnetmon
-*iPerf3 web frontend &amp; datalogger*
+*iPerf3 web frontend &amp; datalogger, originally developed for the University of Kent*
 
 This system allows a user to set up automated iPerf3 tests and view the results of previous tests in a graphical format. This is the 'webserver' part of the project - the 'agents' are Raspberry Pis or any other machine on the network that runs iPerf3 as a server.
 
