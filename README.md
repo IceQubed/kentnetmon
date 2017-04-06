@@ -31,7 +31,7 @@ This system allows a user to set up automated iPerf3 tests and view the results 
  - If changes are made to the server code in the git repository, use ‘git pull && npm i && forever restartall’ to update. Next do step 8 of server installation again. 
  - Refer to the ‘forever’ usage guide for more options - https://www.npmjs.com/package/forever#command-line-usage 
 
-##Website Usage
+## Website Usage
 Google Chrome, Microsoft Edge, and Chrome for Android are supported. Other browsers may incorrectly display graphs or date selection input.
 
 The image above shows the main ‘dashboard’ page of the system, from which graphs of previous results are shown along the figures on the left-hand side showing the latest data. The date range of the system can be selected from the drop-down calendar. When the date range is changed, the page will reload data for the specified graph. 
