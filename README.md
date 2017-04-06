@@ -33,7 +33,7 @@ This system allows a user to set up automated iPerf3 tests and view the results 
 
 ## Website Usage
 Google Chrome, Microsoft Edge, and Chrome for Android are supported. Other browsers may incorrectly display graphs or date selection input.
-
+### Dashboard
 The image above shows the main ‘dashboard’ page of the system, from which graphs of previous results are shown along the figures on the left-hand side showing the latest data. The date range of the system can be selected from the drop-down calendar. When the date range is changed, the page will reload data for the specified graph. 
 
 The user can hover over a result in the graph, to see a readout of the full measurement and date/time for that result. This is more accurate than estimating from the graph’s Y axis alone. If one of the graph legends is clicked, it is toggled from being displayed on the graph.
@@ -42,8 +42,10 @@ Tests can be ran from the side menu, allowing the user to run tests as required 
 
 The ‘mini graph’ shown below the graph is a ‘sub-graph’, which allows the user to zoom in to the main graph. Simply click and drag along the mini graph on the range to be viewed. The view can be moved by dragging the highlighted section across the mini graph, and can be reset by clicking on the mini graph outside the selected area.
 
+### Scheduling
 There is a scheduling page for controlling the timing of planned testing. It is recommended to schedule tests at 30 minute intervals if testing is desired for more than a few days. This is because a lower interval causes a very high number of tests to be ran across a day, meaning the page’s graphs will load very slowly due to the excess data points to be displayed. The schedule page's drop-down menu has some useful default values, however for more control use the ‘advanced setup’ option, allowing entry of the schedule in cron-like format. Refer to the link on the scheduling page for more information. Schedules can be deleted from this page. Feel free to experiment with the advanced setup option, as the schedules will be displayed when they are set meaning the user can see exactly when the test will run as soon as they add the schedule.
 
+### Agent Management
 The 'add agent' page is a simple form that allows entry of a new agent into the system. Name the agent something memorable, for example ‘Dev Pi’, provide its address, for example ‘129.12.136.4’, and its location, for example ‘Darwin Wiring Centre’. On submitting the form, the user is redirected to the home page. 
 
 Agent deletion is handled from the home page, and pops up a confirmation box. Agent deletion removes all associated data such as results and schedules, so do not delete an agent if result history is required. 
