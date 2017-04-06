@@ -232,5 +232,5 @@ mongoose.model('pings', Ping);
 if (process.env.NODE_ENV === 'develop') {
     mongoose.connect('mongodb://localhost/kentnetmon');
 } else {
-    mongoose.connect('mongodb://netperf:Pq8U5IlIijzK@localhost/netperf');
+    mongoose.connect('mongodb://USERNAME:PASSWORD@localhost/DATABASENAME'); // <------ EDIT THIS LINE --------
 }
