@@ -12,7 +12,7 @@ This system allows a user to set up automated iPerf3 tests and view the results 
  4.	Set up the MongoDB database to store the KentNetMon data
  5.	Use git clone to download the project to the folder you want to run it from
  6.	In the project folder run ‘npm install’ to download all necessary packages
- 7.	    Run ‘npm install forever -g’ to install the ‘Forever’ package
+ 7.	Run ‘npm install forever -g’ to install the ‘Forever’ package
  8.	Edit line 235 of database.js in the project folder with the database connection string of the database you set up in step 4
  9.	Run ‘forever start app.js’ – the server should now be running on port 8080.
 
